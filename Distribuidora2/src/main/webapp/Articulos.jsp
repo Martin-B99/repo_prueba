@@ -12,8 +12,54 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <title>Articulos</title>
+        <link rel="icon" type="image" href="distribuidora_logo.png">
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="Controlador?menu=Principal">Distribuidora</a>
+           
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+           
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <!--  <li class="nav-item active">
+                        <a class="nav-link">Home<span class="sr-only">(current)</span></a>
+                    </li>-->
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="Controlador?menu=Clientes&accion=Listar" target="miContenedor">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Controlador?menu=Articulos&accion=Listar" target="miContenedor">Articulos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Controlador?menu=Pedidos&accion=Listar" target="miContenedor">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Controlador?menu=TipoArticulo&accion=Listar" target="miContenedor">Tipo Articulo</a>
+                    </li>
+                </ul>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ${usuario.getNombre()}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i></a>
+                        <a class="dropdown-item" href="#">${usuario.getDocumento()}</a>
+                        <a class="dropdown-item" href="#">${usuario.getCorreo()}</a>
+                        <div class="dropdown-divider"></div>
+                        <form class="dropdown-item" method="POST" action="Validar">
+                            <button class="btn btn-danger center-block" type="submit" name="accion" value="Salir">Cerrar Sesion</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    
         <div class="row">
             <div class="card col-md-4">
                 <div class="card-body">
