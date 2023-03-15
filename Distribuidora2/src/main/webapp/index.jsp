@@ -7,23 +7,24 @@
 <meta charset="utf-8">
     
     <link rel="stylesheet" href="style.css">
-<title>Inicio</title>
+<title>Distribuidora</title>
+<link rel="icon" type="image" href="distribuidora_logo.png">
 </head>
 <body>
  <div class="center">
-      <h1>Login</h1>
+      <h1>¡Bienvenido!</h1>
       <form action="Validar" method="POST">
         <div class="txt_field">
           <input type="text" required name="txtusuario">
           <span></span>
-          <label>Username</label>
+          <label>Usuario</label>
         </div>
         <div class="txt_field">
           <input type="password" required name="txtpassword">
           <span></span>
-          <label>Password</label>
+          <label>Contraseña</label>
         </div>
-        <div class="pass">Forgot Password?</div>
+        <div class="pass">¿Olvidaste tu Contraseña?</div>
         <input type="submit" name="accion" value="Ingresar">
         <br></br>
         <!--  
