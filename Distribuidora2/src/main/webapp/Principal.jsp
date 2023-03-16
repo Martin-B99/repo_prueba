@@ -10,19 +10,15 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <title>Inicio</title>
-        <link rel="icon" type="image" href="distribuidora_logo.png">
+        <title>Distribuidora</title>
     </head>
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="Controlador?menu=Principal">Distribuidora</a>
-           
+            <a class="navbar-brand" href="#">Distribuidora</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
-           
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -61,23 +57,7 @@
         </nav>
 
         <div class="m-3" style="height:900px;">
-            
-         <center>
-		 <img src="distribuidora_logo.png" width="260"  height="200">
-		</center>
-            
-            <center>
-            <div><h2 class="elementor-heading-title elementor-size-default" >¿Quienes Somos?</h2></div>
-            </center>
-            <br>
-            <div>Distribuidora Integral es una pequeña pyme familiar del rubro alimentario, que funciona regular e ininterrumpidamente desde el año 2000, año en que fue fundada por Juan Carlos Chavez. Se desempeña en el abastecimiento del mercado de alimentos minorista, tanto en la localidad de Baradero como el Alsina. Su especialización se centra en lácteos, fiambres, helados y hamburguesas.</div>
-           <br>
-             <center>
-           <div><h4 class="elementor-heading-title elementor-size-default">NUESTRA MISIÓN</h4></div>
-         </center>
-         
-         <div>Distribuidora Integral busca posicionarse como la empresa líder y de referencia en el mercado de distribución de alimentos baraderense. Para esto, sobre la base de la planificación estratégica y el trabajo duro, su accionar se encuentra focalizado en brindar a sus clientes la posibilidad de obtener los productos al mejor precio del mercado, como así también en desarrollar una relación comercial duradera y de calidad con cada una de los mismos.</div>
-       
+            <iframe name="miContenedor" style="height:100%; width:100%;" frameBorder="1"></iframe>
         </div>
 
         <!-- Optional JavaScript -->
@@ -85,13 +65,5 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    
-     	<footer>
-  			<p style="text-align:center;"><b>Autores:</b> Bolatti Martin - Santagati Juan Pablo.</p>
-  			
-  			
- 		 	<p style="text-align:center;"><b>Proyecto Web Java</b></p>
-		</footer>
     </body>
-    
 </html>
