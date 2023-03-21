@@ -5,6 +5,12 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+.box {
+	margin: 0 auto;
+ height: 100px;
+width: 70%;
+
+}
 body{
   margin: 0;
   padding: 0;
@@ -111,3 +117,4 @@ input[type="submit"]:hover{
 .signup_link a:hover{
   text-decoration: underline;
 }
+

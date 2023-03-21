@@ -16,7 +16,7 @@
 	        
         
     </head>
-    <body>
+    <body style="background-color:black;">
 
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -65,23 +65,12 @@
         </nav>
         
 
-        <div class="m-3"  style="height:500px;">
+        <div class="m-3"  style="height:700px;">
        
         
         
-            <iframe name="miContenedor" style="height:100%; width:100%;" frameBorder="1" 
-            srcdoc="<h1>Bienvenido a tu Distribuidora</h1><h3>¿Quienes Somos?</h3>
-            <p>SDistribuidora Integral es una pequeña pyme familiar del rubro alimentario, 
-            que funciona regular e ininterrumpidamente desde el año 2000, año en que fue fundada por 
-            Juan Carlos Chavez. Se desempeña en el abastecimiento del mercado de alimentos minorista, 
-            tanto en la localidad de Baradero como el Alsina. Su especialización se centra en lácteos, 
-            fiambres, helados y hamburguesas.</p>
-            <h3>Nuestra Mision</h3>
-            <p>Distribuidora Integral busca posicionarse como la empresa líder y de referencia en el mercado 
-            de distribución de alimentos baraderense. Para esto, sobre la base de la planificación estratégica 
-            y el trabajo duro, su accionar se encuentra focalizado en brindar a sus clientes la posibilidad de 
-            obtener los productos al mejor precio del mercado, como así también en desarrollar una relación 
-            comercial duradera y de calidad con cada una de los mismos.</p>" ></iframe>
+            <iframe name="miContenedor" style="height:100%; width:100%; background-color: bisque;" frameBorder="1"  
+            src="fin.jsp" ></iframe>
    
         </div>
 
