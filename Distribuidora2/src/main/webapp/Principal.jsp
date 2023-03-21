@@ -18,8 +18,9 @@
     </head>
     <body>
 
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Distribuidora</a>
+          <a class="navbar-brand" href="Principal.jsp" >Distribuidora</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,6 +30,8 @@
                   <!--  <li class="nav-item active">
                         <a class="nav-link">Home<span class="sr-only">(current)</span></a>
                     </li>-->
+                    
+                     
                     
                     <li class="nav-item">
                         <a class="nav-link" href="Controlador?menu=Clientes&accion=Listar" target="miContenedor">Clientes</a>
@@ -42,6 +45,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Controlador?menu=TipoArticulo&accion=Listar" target="miContenedor">Tipo Articulo</a>
                     </li>
+                   
                 </ul>
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,9 +63,26 @@
                 </div>
             </div>
         </nav>
+        
 
-        <div class="m-3" style="height:900px;">
-            <iframe name="miContenedor" style="height:100%; width:100%;" frameBorder="1"></iframe>
+        <div class="m-3"  style="height:500px;">
+       
+        
+        
+            <iframe name="miContenedor" style="height:100%; width:100%;" frameBorder="1" 
+            srcdoc="<h1>Bienvenido a tu Distribuidora</h1><h3>¿Quienes Somos?</h3>
+            <p>SDistribuidora Integral es una pequeña pyme familiar del rubro alimentario, 
+            que funciona regular e ininterrumpidamente desde el año 2000, año en que fue fundada por 
+            Juan Carlos Chavez. Se desempeña en el abastecimiento del mercado de alimentos minorista, 
+            tanto en la localidad de Baradero como el Alsina. Su especialización se centra en lácteos, 
+            fiambres, helados y hamburguesas.</p>
+            <h3>Nuestra Mision</h3>
+            <p>Distribuidora Integral busca posicionarse como la empresa líder y de referencia en el mercado 
+            de distribución de alimentos baraderense. Para esto, sobre la base de la planificación estratégica 
+            y el trabajo duro, su accionar se encuentra focalizado en brindar a sus clientes la posibilidad de 
+            obtener los productos al mejor precio del mercado, como así también en desarrollar una relación 
+            comercial duradera y de calidad con cada una de los mismos.</p>" ></iframe>
+   
         </div>
 
         <!-- Optional JavaScript -->
@@ -69,5 +90,12 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  
+  
+  <footer>
+  <p style="text-align:center"><b>Autores: </b>Bolatti Martin Francisco - Santagati Juan Pablo.</p>
+  <p style="text-align:center;"><b>Proyecto Web Java</b></p>
+</footer>
+  
     </body>
 </html>
