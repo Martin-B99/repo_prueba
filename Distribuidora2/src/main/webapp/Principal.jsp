@@ -81,10 +81,12 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   
   
+  <font color="white"> 
   <footer>
   <p style="text-align:center"><b>Autores: </b>Bolatti Martin Francisco - Santagati Juan Pablo.</p>
   <p style="text-align:center;"><b>Proyecto Web Java</b></p>
 </footer>
+</font>
   
     </body>
 </html>

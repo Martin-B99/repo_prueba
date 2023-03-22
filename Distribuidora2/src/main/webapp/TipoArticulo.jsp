@@ -26,7 +26,7 @@
                             
                              <div class="form-group">
                                 <label>Descripcion</label>
-                                <input type="text" class="form-control" name="txtdescripcion" value="${tipoArticuloSeleccionado.getDescripcion()}">
+                                <input type="text" class="form-control" name="txtdescripcion" list="descrip" value="${tipoArticuloSeleccionado.getDescripcion()}">
                             </div>
    
  
@@ -36,7 +36,17 @@
                     </div>
                 </div>
             </div>
-          
+         					
+         					
+         					 <datalist id="descrip">
+                            	<option value="Caramelo"></option>
+                            	<option value="Galletita"></option>
+                            	<option value="Chocolate"></option>
+                            	<option value="Tostada"></option>
+                            	<option value="Chupaleta"></option>
+                            	<option value="Gaseosa"></option>
+                            
+                            </datalist>
 
             <div class="col-md-8">
                 <table class="table">

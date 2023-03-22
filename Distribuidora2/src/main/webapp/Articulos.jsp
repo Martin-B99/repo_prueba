@@ -25,12 +25,12 @@
                         
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" class="form-control" name="txtnombre" value="${articuloSeleccionado.getNombre()}">
+                                <input type="text" class="form-control" name="txtnombre" list="articulos" value="${articuloSeleccionado.getNombre()}">
                             </div>
                             
                             <div class="form-group">
                                 <label>Tipo Articulo</label>
-                                <input type="text" class="form-control" name="txttipo_articulo" value="${articuloSeleccionado.getTa().getDescripcion()}">
+                                <input type="text" class="form-control" name="txttipo_articulo" list="tipoarticulos" value="${articuloSeleccionado.getTa().getDescripcion()}">
                             </div>
                             
                             <div class="form-group">
@@ -41,6 +41,25 @@
                                 <label>Precio</label>
                                 <input type="text" class="form-control" name="txtprecio" value="${articuloSeleccionado.getPrecio()}">
                             </div>
+                            
+                            <datalist id="articulos">
+                            	<option value="Masticable Misky x 1kg"></option>
+                            	<option value="Dos Corazones x 20u"></option>
+                            	<option value="Tostada Mesa x 12u"></option>
+                            	<option value="Mr Pop Frutal Arcor Paquete x 50u"></option>
+                            	<option value="Coca Cola Botella 500ml Original Pack x 12"></option>
+                            
+                            </datalist>
+                            
+                            <datalist id="tipoarticulos">
+                            	<option value="Caramelo"></option>
+                            	<option value="Galletita"></option>
+                            	<option value="Chocolate"></option>
+                            	<option value="Tostada"></option>
+                            	<option value="Chupaleta"></option>
+                            	<option value="Gaseosa"></option>
+                            
+                            </datalist>
                          
        
 
