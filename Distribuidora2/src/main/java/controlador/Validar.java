@@ -51,13 +51,21 @@ public class Validar extends HttpServlet {
 	            String pass = request.getParameter("txtpassword");
 	            usuario = usuarioDAO.Validar(documento, pass);
 	            System.out.print("dato"+usuario.getNombre());
-	            if(usuario.getNombre()!= null){
+	            if(usuario.getNombre()!= null && usuario.getRol().equals("Empleado")){
 	                System.out.print("dato1"+usuario.getNombre());
 	                request.setAttribute("usuario", usuario);
 	                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
 	                
 
-	            }else{
+	            }
+	            else if(usuario.getNombre()!= null && usuario.getRol().equals("Cliente")){
+	                System.out.print("dato1"+usuario.getNombre());
+	                request.setAttribute("usuario", usuario);
+	                request.getRequestDispatcher("Controlador?menu=PrincipalCliente").forward(request, response);}
+	                
+	            
+	            
+	            else{
 	            	request.getRequestDispatcher("index.jsp").forward(request, response);
 	                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
 	                

@@ -20,7 +20,7 @@
 
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="Principal.jsp" >Distribuidora</a>
+          <a class="navbar-brand" href="PrincipalCliente.jsp" >Distribuidora</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,16 +34,16 @@
                      
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="Controlador?menu=Clientes&accion=Listar" target="miContenedor">Clientes</a>
+                        <a class="nav-link" href="Controlador?menu=ClientesCliente&accion=Listar" target="miContenedor">Clientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Controlador?menu=Articulos&accion=Listar" target="miContenedor">Articulos</a>
+                        <a class="nav-link" href="Controlador?menu=ArticulosCliente&accion=Listar" target="miContenedor">Articulos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Controlador?menu=Pedidos&accion=Listar" target="miContenedor">Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Controlador?menu=TipoArticulo&accion=Listar" target="miContenedor">Tipo Articulo</a>
+                        <a class="nav-link" href="Controlador?menu=TipoArticuloCliente&accion=Listar" target="miContenedor">Tipo Articulo</a>
                     </li>
                    
                 </ul>

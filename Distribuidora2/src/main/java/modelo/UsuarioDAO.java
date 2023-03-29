@@ -34,6 +34,7 @@ public class UsuarioDAO {
 	                usuario.setNombre(rs.getString("nombre"));
 	                usuario.setPassword(rs.getString("password"));
 	                usuario.setCorreo(rs.getString("correo"));
+	                usuario.setRol(rs.getString("rol"));
 	              
 	            } while (rs.next());
 	        } catch (SQLException ex) {
