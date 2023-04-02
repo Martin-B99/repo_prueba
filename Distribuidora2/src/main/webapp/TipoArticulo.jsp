@@ -18,8 +18,11 @@
         <div class="row">
             <div class="card col-md-4">
                 <div class="card-body">
-                    <h5 class="card-title">Tipo Articulo</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">En este panel podras gestionar los datos de los Tipos de Articulos</h6>
+                    <h5 class="card-title" align="center">Tipo Articulo</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" align="center">En este panel podras Gestionar los datos de los Tipos de Articulos</h6>
+                     <center>
+  						<img alt="logo" src="estanteria.png"  width="200" height="200" >
+   					</center>
                     <div>
                         <form action="Controlador?menu=TipoArticulo" method="POST">
 

@@ -18,8 +18,11 @@
         <div class="row">
             <div class="card col-md-4">
                 <div class="card-body">
-                    <h5 class="card-title">Articulos</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">En este panel podras gestionar los Articulos</h6>
+                   <h5 class="card-title" align="center">Articulos</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" align="center">En este panel podras Gestionar los Articulos</h6>
+                     <center>
+  						<img alt="logo" src="supermercado.png"  width="200" height="200" >
+   					</center>
                     <div>
                         <form action="Controlador?menu=Articulos" method="POST">
                         

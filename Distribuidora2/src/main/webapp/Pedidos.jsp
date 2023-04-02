@@ -61,6 +61,9 @@
                             <div class="row"></div>
 
                         </form>
+                        <center>
+  						<img alt="logo" src="pedido.png"  width="200" height="200" >
+   					</center>
                     </div>
                 </div>
             </div>
