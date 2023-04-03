@@ -118,3 +118,20 @@ input[type="submit"]:hover{
   text-decoration: underline;
 }
 
+.btn-contacto {
+  background-color: #00ffff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.btn-contacto:hover {
+  background-color: #c0c0c0;
+  cursor: pointer;
+}

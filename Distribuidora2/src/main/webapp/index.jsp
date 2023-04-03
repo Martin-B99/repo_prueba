@@ -18,28 +18,16 @@
  <center>
   <img alt="logo" src="distribuidora_logo.png"  width="200" height="200" >
    </center>
-      <h1>¡Bienvenido!</h1>
-      <form action="Validar" method="POST">
-        <div class="txt_field">
-        
-          <input type="text" required name="txtusuario">
-          <span></span>
-          <label>Usuario</label>
-        </div>
-        <div class="txt_field">
-          <input type="password" required name="txtpassword">
-          <span></span>
-          <label>Contraseña</label>
-        </div>
-        <div class="pass">¿Olvidaste tu Contraseña?</div>
-        <input type="submit" name="accion" value="Ingresar">
-        <br></br>
-        <!--  
-        <div class="signup_link">
-          Not a member? <a href="#">Signup</a>
-        </div>-->
-      </form>
-    </div>
-
+      <h1>¡Tu Distribuidora!</h1>
+      <center>
+      <button class="btn-contacto"><a href="ingreso.jsp">Ingresar</a></button>
+        </center>
+      
+       <center>
+      <button class="btn-contacto"><a href="fin.jsp">Sobre Nosotros</a></button>
+        </center>
+		
+      
+    
 </body>
 </html>

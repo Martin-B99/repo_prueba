@@ -13,6 +13,8 @@
          <img alt="logo" src="distribuidora_logo.png"  width="300" height="300">
         </center>
         
+		
+        
 		 <font color="white">
 		<h1 style="font-family: sans-serif;" align="center"><b>¿Quienes Somos?</b></h1><br>
 		<div class="box"><p style="font-family: sans-serif;" align="center">
@@ -32,7 +34,9 @@
         al mejor precio del mercado, como así también en desarrollar una relación comercial duradera y de calidad con cada una de los mismos.</p>
 	</div>
 </font> 
-
+<center>
+      <button class="btn-contacto"><a href="index.jsp">Volver al Inicio</a></button>
+        </center>
 
 </body>
 </html>

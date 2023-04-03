@@ -70,7 +70,7 @@
         
         
             <iframe name="miContenedor" style="height:100%; width:100%; background-color: bisque;" frameBorder="1"  
-            src="fin.jsp" ></iframe>
+            src="bienvenida.jsp" ></iframe>
    
         </div>
 
