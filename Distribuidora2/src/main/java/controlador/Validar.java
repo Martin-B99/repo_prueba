@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,33 +48,45 @@ public class Validar extends HttpServlet {
 		
 		  String accion = request.getParameter("accion");
 	        if (accion.equalsIgnoreCase("Ingresar")) {
-	            int documento = Integer.parseInt(request.getParameter("txtusuario"));
-	            String pass = request.getParameter("txtpassword");
-	            usuario = usuarioDAO.Validar(documento, pass);
-	            System.out.print("dato"+usuario.getNombre());
-	            if(usuario.getNombre()!= null && usuario.getRol().equals("Empleado")){
-	                System.out.print("dato1"+usuario.getNombre());
-	                request.setAttribute("usuario", usuario);
-	                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
-	                
+	        	try {
+	        		int documento = Integer.parseInt(request.getParameter("txtusuario"));
+		            String pass = request.getParameter("txtpassword");
+		            usuario = usuarioDAO.Validar(documento, pass);
+		            System.out.print("dato"+usuario.getNombre());
+		            if(usuario.getNombre()!= null && usuario.getRol().equals("Empleado")){
+		                System.out.print("dato1"+usuario.getNombre());
+		                request.setAttribute("usuario", usuario);
+		                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
+		                
 
-	            }
-	            else if(usuario.getNombre()!= null && usuario.getRol().equals("Cliente")){
-	                System.out.print("dato1"+usuario.getNombre());
-	                request.setAttribute("usuario", usuario);
-	                request.getRequestDispatcher("Controlador?menu=PrincipalCliente").forward(request, response);}
+		            }
+		            else if(usuario.getNombre()!= null && usuario.getRol().equals("Cliente")){
+		                System.out.print("dato1"+usuario.getNombre());
+		                request.setAttribute("usuario", usuario);
+		                request.getRequestDispatcher("Controlador?menu=PrincipalCliente").forward(request, response);}
+		                
+		            
+		            
+		            else{
+		            	request.getRequestDispatcher("ingreso.jsp").forward(request, response);
+		                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+		                
+		            }
+				} catch (NumberFormatException nfe) {
+			
 	                
+	                
+	                JOptionPane.showMessageDialog(null, "Documento Incorrecto",
+	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+				}
+	        	request.getRequestDispatcher("ingreso.jsp").forward(request, response);
 	            
 	            
-	            else{
-	            	request.getRequestDispatcher("index.jsp").forward(request, response);
-	                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
-	                
-	            }
 	            
 
 	        }else{
-	            request.getRequestDispatcher("index.jsp").forward(request, response);
+	            request.getRequestDispatcher("ingreso.jsp").forward(request, response);
 	        }
 
 	    }

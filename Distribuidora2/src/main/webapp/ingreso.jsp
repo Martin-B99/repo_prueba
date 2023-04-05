@@ -24,7 +24,7 @@
         
           <input type="text" required name="txtusuario">
           <span></span>
-          <label>Usuario</label>
+          <label>Documento</label>
         </div>
         <div class="txt_field">
           <input type="password" required name="txtpassword">
