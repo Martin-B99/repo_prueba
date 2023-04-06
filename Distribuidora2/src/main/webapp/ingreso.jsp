@@ -35,6 +35,7 @@
         <input type="submit" name="accion" value="Ingresar">
         <br></br>
         <!--  
+        
         <div class="signup_link">
           Not a member? <a href="#">Signup</a>
         </div>-->
