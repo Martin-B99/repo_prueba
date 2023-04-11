@@ -1,6 +1,9 @@
 package controlador;
 
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Articulo;
 import modelo.ArticuloDAO;
+import modelo.ArticuloPedido;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Pedido;
+import modelo.PedidoDAO;
 import modelo.TipoArticuloDAO;
 import modelo.Tipo_Articulo;
 
@@ -33,11 +39,24 @@ public class Controlador extends HttpServlet {
 	Tipo_Articulo tipoArt = new Tipo_Articulo();
 	TipoArticuloDAO tipoArtDAO = new TipoArticuloDAO();
 	
+	Pedido pedido = new Pedido();
+	PedidoDAO pedidoDAO = new PedidoDAO();
 	
+	ArticuloPedido articulopedido = new ArticuloPedido();
+	
+	List<ArticuloPedido> articulos_pedidos = new ArrayList<ArticuloPedido>();
 
 	int idCliente;
 	int idArticulo;
 	int idTipo;
+	String NombreCliente;
+	int id;
+	int totalpedido;
+	
+	String nombre;
+	double precio;
+	double cantidad;
+	double subtotal;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -228,7 +247,7 @@ public class Controlador extends HttpServlet {
 			  switch (accion) {
 			  
 			  case "BuscarCliente":
-                  int idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
+				  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
                   cliente = clienteDAO.buscarClienteId(idCliente);
                   request.setAttribute("cliente", cliente);
                   break;
@@ -415,19 +434,51 @@ public class Controlador extends HttpServlet {
 			  request.getRequestDispatcher("TipoArticuloCliente.jsp").forward(request, response); 
 				  }
 			  if (menu.equals("Pedidos")) {
-				  switch (accion) {
+				  
+				
+				switch (accion) {
 				  
 				  case "BuscarCliente":
-	                  int idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
+	                  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
 	                  cliente = clienteDAO.buscarClienteId(idCliente);
 	                  request.setAttribute("cliente", cliente);
 	                  break;
 	              
 				  case "BuscarProducto":
-	                  int idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+	                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
 	                  articulo = articuloDAO.buscarArticuloId(idArticulo);
 	                  request.setAttribute("articulo", articulo);
+	                  request.setAttribute("cliente", cliente);
 	                  break;
+	                  
+				  case "AgregarProducto":
+	                    totalpedido = 0;
+	                    articulopedido = new ArticuloPedido();
+	                    id++;
+	                    idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+	                    nombre = request.getParameter("txtnombreproducto");
+	                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
+	                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
+	                    subtotal = precio * cantidad;
+	                    articulopedido.setId(id);
+	                    articulopedido.setNombre(nombre);
+	                    articulopedido.setCantidad(cantidad);
+	                    articulopedido.setPrecio(precio);
+	                    articulopedido.setSubtotal(subtotal);
+	                    articulopedido.setId(idArticulo);
+	                    articulos_pedidos.add(articulopedido);                  
+	                    for (ArticuloPedido articuloPedido : articulos_pedidos) {
+							System.out.println(articuloPedido.getNombre());
+						}
+	                    for (int i = 0; i < articulos_pedidos.size(); i++) {
+	                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
+	                    }
+	                    NumberFormat formatoNumero1 = NumberFormat.getNumberInstance();
+	                    String total = formatoNumero1.format(totalpedido);
+	                    request.setAttribute("lista_articulos", articulopedido);
+	                    ///request.setAttribute("totalapagar", total);
+	                    break;
+	                
 				  }
 					request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
 				}

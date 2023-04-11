@@ -28,10 +28,19 @@
                     <div class="card-body">
                         <form method="post" action="Controlador?menu=Pedidos">
                             <div class="row">
-                                <div class="col-md-8 d-flex">
-                                    <input type="text" name="txtnombrecliente" class="form-control" placeholder="Nombre cliente"  value="${cliente.getNombre()}">
-                                    <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-dark">
+                                <div class="col-md-4 d-flex form-group">
+                                    <input type="text" name="txtidcliente" class="form-control" placeholder="Id"  value="${cliente.getId()}">
+                                    <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-dark"> 
                                 </div>
+                                <div class="col-md-4 d-flex form-group">
+                                 	<input type="text" name="txtnombrecliente" class="form-control" placeholder="Nombre"  value="${cliente.getNombre()}">
+                                 </div>
+                                 <div class="col-md-4 d-flex form-group">
+                                 	<input type="text" name="txttelefono" class="form-control" placeholder="Telefono"  value="${cliente.getTelefono()}">
+                                 </div>
+                                 <div class="col-md-4 d-flex form-group">
+                                 	<input type="text" name="txtdireccion" class="form-control" placeholder="Direccion"  value="${cliente.getDireccion()}">
+                                 </div>
                             </div>
                             <div class="row"></div>
 
@@ -43,12 +52,12 @@
                     <div class="card-body">
                         <form action="Controlador?menu=Pedidos" method="post">
                             <div class="row">
-                                <div class="col-md-4 d-flex form-group">
-                                    <input type="number" name="txtidproducto" class="form-control" placeholder="Codigo Producto" value="${articulo.getId()}">
+                                <div class="5 d-flex form-group">
+                                    <input type="number" name="txtidproducto" class="form-control" placeholder="Id" value="${articulo.getId()}">
                                     <input type="submit" name="accion" value="BuscarProducto" class="btn btn-outline-dark">
                                 </div>
-                                <div class="col-md-8 d-flex form-group">
-                                    <input type="text" name="txtnombreproducto" class="form-control" placeholder="Nombre Producto" value="${articulo.getNombre()}">
+                                <div class="col-md-6 d-flex form-group">
+                                    <input type="text" name="txtnombreproducto" class="form-control" placeholder="Nombre Articulo" value="${articulo.getNombre()}">
                                 </div>
                                 <div class="col-md-4 d-flex form-group">
                                     <input type="text" name="txtprecioproducto" class="form-control" placeholder="$ 0000.00" value="${articulo.getPrecio()}">
@@ -89,23 +98,23 @@
                             <th scope="col" class="columna">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                   
-                       <c:forEach var="lista" items="${listaventas}">
+                    <tbody> 
+                  
+                   <c:forEach var="lista" items="${lista_articulos}">
                         <tr>
-                            <th scope="row" style="width: 30px;">${lista.getItem()}</th>
-                            <td style="width: 30px;">${lista.getIdProducto()}</td>
-                            <td style="width: 350px;">${lista.getDescripcionProducto()}</td>
+                            <th scope="row" style="width: 30px;">${lista.getId()}</th>
+                            <td>${lista.getIdArticulo()}</td>
+                            <td>${lista.getNombre()}</td>
                             <td>$ ${lista.getPrecio()}</td>
-                            <td style="width: 30px;">${lista.getCantidad()}</td>
+                            <td>${lista.getCantidad()}</td>
                             <td>$ ${lista.getSubtotal()}</td>
                             <td class="columna">
                                 <a class="btn btn-danger">Eliminar</a>
                                 <a class="btn btn-warning">Editar</a>
                             </td>
                         </tr>
-                        </c:forEach>
-
+                        </c:forEach> 
+                      
                        </tbody>
                 </table>
                     </div>

@@ -123,7 +123,7 @@ public class ClienteDAO {
             	cliente.setId(rs.getInt("id"));
             	cliente.setNombre(rs.getString("nombre"));
             	cliente.setTelefono(rs.getString("telefono"));
-            	cliente.setDireccion(rs.getString("apellido"));
+            	cliente.setDireccion(rs.getString("direccion"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,6 +131,7 @@ public class ClienteDAO {
 		
 		return cliente;
 	}
+	
     
     
 }
