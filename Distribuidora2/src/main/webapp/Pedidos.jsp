@@ -100,14 +100,14 @@
                     </thead>
                     <tbody> 
                   
-                   <c:forEach var="lista" items="${lista_articulos}">
+                   <c:forEach var="lista_articulos" items="${lista_articulos}">
                         <tr>
-                            <th scope="row" style="width: 30px;">${lista.getId()}</th>
-                            <td>${lista.getIdArticulo()}</td>
-                            <td>${lista.getNombre()}</td>
-                            <td>$ ${lista.getPrecio()}</td>
-                            <td>${lista.getCantidad()}</td>
-                            <td>$ ${lista.getSubtotal()}</td>
+                            <th scope="row" style="width: 30px;">${lista_articulos.getId()}</th>
+                            <td>${lista_articulos.getIdArticulo()}</td>
+                            <td>${lista_articulos.getNombre()}</td>
+                            <td>$ ${lista_articulos.getPrecio()}</td>
+                            <td>${lista_articulos.getCantidad()}</td>
+                            <td>$ ${lista_articulos.getSubtotal()}</td>
                             <td class="columna">
                                 <a class="btn btn-danger">Eliminar</a>
                                 <a class="btn btn-warning">Editar</a>
@@ -115,7 +115,7 @@
                         </tr>
                         </c:forEach> 
                       
-                       </tbody>
+                   </tbody>
                 </table>
                     </div>
                     <div class="card-footer d-flex">
