@@ -303,6 +303,22 @@ public class Controlador extends HttpServlet {
 				}
 		 
 		  
+		  
+		  if (menu.equals("Ventas")) {
+			  
+			  switch (accion) {
+			  
+			  case "GenerarVenta":
+				  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
+                  break;
+              
+			  case "NuevaVenta":
+				  request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
+		  }
+			request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
+		
+		  }
+		  
 //---------------------------------------------------------------------------------------------------------------
 		  
 		  
