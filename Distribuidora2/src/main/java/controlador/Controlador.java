@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
+
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import modelo.Articulo;
 import modelo.ArticuloDAO;
@@ -44,6 +47,7 @@ public class Controlador extends HttpServlet {
 	PedidoDAO pedidoDAO = new PedidoDAO();
 	
 	ArticuloPedido articulopedido = new ArticuloPedido();
+	
 	
 	List<ArticuloPedido> articulos_pedidos = new ArrayList<ArticuloPedido>();
 
@@ -251,10 +255,18 @@ public class Controlador extends HttpServlet {
 				switch (accion) {
 				  
 				  case "BuscarCliente":
-	                  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
-	                  cliente = clienteDAO.buscarClienteId(idCliente);
-	                  request.setAttribute("cliente", cliente);
+					  try {
+						  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
+		                  cliente = clienteDAO.buscarClienteId(idCliente);
+		                  
+					} catch (NumberFormatException nfe) {
+					                 
+		                JOptionPane.showMessageDialog(null, "Id Invalido",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+					}
+					  request.setAttribute("cliente", cliente);
 	                  break;
+	                  
 	              
 				  case "BuscarProducto":
 	                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
@@ -272,9 +284,9 @@ public class Controlador extends HttpServlet {
 	                    nombre = request.getParameter("txtnombreproducto");
 	                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
 	                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
-	                    if (cantidad > Double.parseDouble(articulo.getStock())) {
-	                    	id--;
+	                    if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
 	                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
+	                    	id--;
 							break;
 						}
 	                    id++;
@@ -286,17 +298,39 @@ public class Controlador extends HttpServlet {
 	                    articulopedido.setSubtotal(subtotal);
 	                    articulopedido.setId(idArticulo);
 	                    articulos_pedidos.add(articulopedido);	                   
-	                    request.setAttribute("lista_articulos", articulos_pedidos);
-	                    for (ArticuloPedido articuloPedido : articulos_pedidos) {
-							System.out.println(articuloPedido.getNombre());
-						}
+	                    request.setAttribute("lista_articulos", articulos_pedidos);                
 	                    for (int i = 0; i < articulos_pedidos.size(); i++) {
 	                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
 	                    }
 	                    NumberFormat formatoNumero1 = NumberFormat.getNumberInstance();
 	                    String total = formatoNumero1.format(totalpedido);	                    
 	                    request.setAttribute("totalapagar", total);
-	                    break;
+	                    	break;
+	              
+				  case "Eliminar":
+					  	int idB = 0;
+					  	idArticulo = Integer.parseInt(request.getParameter("id"));
+					  	articulo = articuloDAO.buscarArticuloId(idArticulo);					  	
+					  	for (int i = 0; i < articulos_pedidos.size(); i ++) {
+					  		if (articulos_pedidos.get(i).getId() == articulo.getId()) {
+					  			idB = i;
+							}
+							
+						}				  	
+					  	articulos_pedidos.remove(idB);
+					  	request.setAttribute("cliente", cliente);
+		                request.setAttribute("articulo", articulo);
+		                request.setAttribute("lista_articulos", articulos_pedidos);
+					  	break;
+					  	
+				  case "Editar":				
+					  idArticulo = Integer.parseInt(request.getParameter("id"));
+					  articulo = articuloDAO.buscarArticuloId(idArticulo);					  						  				  						  
+	                  request.setAttribute("cliente", cliente);
+	                  request.setAttribute("articulo", articulo);	                  
+	                  request.setAttribute("lista_articulos", articulos_pedidos);
+	                  break;
+				
 	                
 				  }
 					request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
@@ -310,9 +344,14 @@ public class Controlador extends HttpServlet {
 			  
 			  case "GenerarVenta":
 				  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
+				  request.setAttribute("cliente", cliente);
+                  request.setAttribute("articulo", articulo);	                  
+                  request.setAttribute("lista_articulos", articulos_pedidos);
                   break;
+                 
               
 			  case "NuevaVenta":
+				  articulos_pedidos.removeAll(articulos_pedidos);
 				  request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
 		  }
 			request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
@@ -490,8 +529,116 @@ public class Controlador extends HttpServlet {
 				  }
 			  request.getRequestDispatcher("TipoArticuloCliente.jsp").forward(request, response); 
 				  }
-		  
-
+			  
+			  if (menu.equals("PedidosCliente")) {
+				  
+					
+					switch (accion) {
+					  
+					  case "BuscarCliente":
+						  try {
+							  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
+			                  cliente = clienteDAO.buscarClienteId(idCliente);
+			                  
+						} catch (NumberFormatException nfe) {
+						                 
+			                JOptionPane.showMessageDialog(null, "Id Invalido",
+			                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						}
+						  request.setAttribute("cliente", cliente);
+		                  break;
+		                  
+		              
+					  case "BuscarProducto":
+		                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+		                  articulo = articuloDAO.buscarArticuloId(idArticulo);
+		                  request.setAttribute("cliente", cliente);
+		                  request.setAttribute("articulo", articulo);	                  
+		                  request.setAttribute("lista_articulos", articulos_pedidos);
+		                  break;
+		                  
+					  case "AgregarProducto":
+						  	request.setAttribute("cliente", cliente);
+		                    totalpedido = 0;
+		                    articulopedido = new ArticuloPedido();                    
+		                    idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+		                    nombre = request.getParameter("txtnombreproducto");
+		                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
+		                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
+		                    if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
+		                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
+		                    	id--;
+								break;
+							}
+		                    id++;
+		                    subtotal = precio * cantidad;
+		                    articulopedido.setId(id);
+		                    articulopedido.setNombre(nombre);
+		                    articulopedido.setCantidad(cantidad);
+		                    articulopedido.setPrecio(precio);
+		                    articulopedido.setSubtotal(subtotal);
+		                    articulopedido.setId(idArticulo);
+		                    articulos_pedidos.add(articulopedido);	                   
+		                    request.setAttribute("lista_articulos", articulos_pedidos);                
+		                    for (int i = 0; i < articulos_pedidos.size(); i++) {
+		                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
+		                    }
+		                    NumberFormat formatoNumero1 = NumberFormat.getNumberInstance();
+		                    String total = formatoNumero1.format(totalpedido);	                    
+		                    request.setAttribute("totalapagar", total);
+		                    	break;
+		              
+					  case "Eliminar":
+						  	int idB = 0;
+						  	idArticulo = Integer.parseInt(request.getParameter("id"));
+						  	articulo = articuloDAO.buscarArticuloId(idArticulo);					  	
+						  	for (int i = 0; i < articulos_pedidos.size(); i ++) {
+						  		if (articulos_pedidos.get(i).getId() == articulo.getId()) {
+						  			idB = i;
+								}
+								
+							}				  	
+						  	articulos_pedidos.remove(idB);
+						  	request.setAttribute("cliente", cliente);
+			                request.setAttribute("articulo", articulo);
+			                request.setAttribute("lista_articulos", articulos_pedidos);
+						  	break;
+						  	
+					  case "Editar":				
+						  idArticulo = Integer.parseInt(request.getParameter("id"));
+						  articulo = articuloDAO.buscarArticuloId(idArticulo);					  						  				  						  
+		                  request.setAttribute("cliente", cliente);
+		                  request.setAttribute("articulo", articulo);	                  
+		                  request.setAttribute("lista_articulos", articulos_pedidos);
+		                  break;
+					
+		                
+					  }
+						request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
+					}
+			 
+			  
+			  
+			  if (menu.equals("VentasClientes")) {
+				  
+				  switch (accion) {
+				  
+				  case "GenerarVenta":
+					  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
+					  request.setAttribute("cliente", cliente);
+	                  request.setAttribute("articulo", articulo);	                  
+	                  request.setAttribute("lista_articulos", articulos_pedidos);
+	                  break;
+	                  
+	              
+				  case "NuevaVenta":
+					  articulos_pedidos.removeAll(articulos_pedidos);
+					  request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
+			  }
+				request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
+			
+			  }
+			
 	}
 
 	/**

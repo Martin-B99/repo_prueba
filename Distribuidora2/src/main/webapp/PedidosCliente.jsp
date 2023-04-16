@@ -26,7 +26,7 @@
                 <div class="card">
                     <h5 class="card-header">Datos cliente</h5>
                     <div class="card-body">
-                        <form method="post" action="Controlador?menu=Pedidos">
+                        <form method="post" action="Controlador?menu=PedidosCliente">
                             <div class="row">
                                 <div class="col-md-4 d-flex form-group">
                                     <input type="text" name="txtidcliente" class="form-control" placeholder="Id"  value="${cliente.getId()}">
@@ -102,8 +102,8 @@
                             <td>${lista_articulos.getCantidad()}</td>
                             <td>$ ${lista_articulos.getSubtotal()}</td>
                             <td class="columna">
-                                <a class="btn btn-warning" href="Controlador?menu=Pedidos&accion=Eliminar&id=${lista_articulos.getId()}">Eliminar</a>
-                                <a class="btn btn-danger" href="Controlador?menu=Pedidos&accion=Editar&id=${lista_articulos.getId()}">Editar</a>
+                                <a class="btn btn-warning" href="Controlador?menu=PedidosCliente&accion=Eliminar&id=${lista_articulos.getId()}">Eliminar</a>
+                                <a class="btn btn-danger" href="Controlador?menu=PedidosCliente&accion=Editar&id=${lista_articulos.getId()}">Editar</a>
                             </td>
                         </tr>
                         </c:forEach> 
@@ -113,8 +113,8 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="col-md-8 text-center">
-                            <a class="btn btn-success" onclick="print()" href="Controlador?menu=Ventas&accion=GenerarVenta">Generar Venta</a>
-                            <a class="btn btn-danger" href="Controlador?menu=Ventas&accion=NuevaVenta">Nueva Venta</a>
+                            <a class="btn btn-success" onclick="print()" href="Controlador?menu=VentasCliente&accion=GenerarVenta">Generar Venta</a>
+                            <a class="btn btn-danger" href="Controlador?menu=VentasClientes&accion=NuevaVenta">Nueva Venta</a>
                           
                         </div>
                         <div class="col-md-4">

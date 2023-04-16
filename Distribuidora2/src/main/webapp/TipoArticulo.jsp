@@ -54,10 +54,10 @@
             <div class="col-md-8">
                 <table class="table">
                     <thead class="thead-dark">
-                        <tr>
-                        
+                        <tr>    
                             <th scope="col">Id</th>
                             <th scope="col">Descripcion</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
