@@ -276,13 +276,13 @@ public class Controlador extends HttpServlet {
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
 	                  break;
 	                  
-				  case "AgregarProducto":
-					  	request.setAttribute("cliente", cliente);
-		                request.setAttribute("lista_articulos", articulos_pedidos);
+				  case "AgregarProducto":				  	
 					  	int existente = 0;
 					  	request.setAttribute("cliente", cliente);
 	                    totalpedido = 0;
-	                    articulopedido = new ArticuloPedido();                    
+	                    articulopedido = new ArticuloPedido(); 
+	                    request.setAttribute("cliente", cliente);
+		                request.setAttribute("lista_articulos", articulos_pedidos);
 	                    idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
 	                    nombre = request.getParameter("txtnombreproducto");
 	                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
@@ -334,7 +334,9 @@ public class Controlador extends HttpServlet {
 							}
 							
 						}				  	
-					  	articulos_pedidos.remove(idB);				  	
+					  	articulos_pedidos.remove(idB);		
+					  	request.setAttribute("cliente", cliente);
+		                request.setAttribute("lista_articulos", articulos_pedidos);
 					  	break;
 					  	
 				  case "Actualizar":
