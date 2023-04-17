@@ -278,6 +278,9 @@ public class Controlador extends HttpServlet {
 	                  
 				  case "AgregarProducto":
 					  	request.setAttribute("cliente", cliente);
+		                request.setAttribute("lista_articulos", articulos_pedidos);
+					  	int existente = 0;
+					  	request.setAttribute("cliente", cliente);
 	                    totalpedido = 0;
 	                    articulopedido = new ArticuloPedido();                    
 	                    idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
@@ -296,8 +299,22 @@ public class Controlador extends HttpServlet {
 	                    articulopedido.setCantidad(cantidad);
 	                    articulopedido.setPrecio(precio);
 	                    articulopedido.setSubtotal(subtotal);
-	                    articulopedido.setId(idArticulo);
-	                    articulos_pedidos.add(articulopedido);	                   
+	                    articulopedido.setId(idArticulo);	      
+	                    
+	                    if (articulos_pedidos.size() == 0) {
+	                    	articulos_pedidos.add(articulopedido);	
+	                    } else {	
+	                    	for (int i= 0; i < articulos_pedidos.size();i++) {
+	                    		if (articulos_pedidos.get(i).getNombre().equals(articulopedido.getNombre())) {
+	                    			existente = 1;	                   
+	                    		}
+	                    	}
+	                    	if (existente == 1) {
+	                    		JOptionPane.showMessageDialog(null, "Articulo Existente");             
+	                    	} else {
+	                    		articulos_pedidos.add(articulopedido);	
+	                    	}
+	                    }	
 	                    request.setAttribute("lista_articulos", articulos_pedidos);                
 	                    for (int i = 0; i < articulos_pedidos.size(); i++) {
 	                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
@@ -317,22 +334,53 @@ public class Controlador extends HttpServlet {
 							}
 							
 						}				  	
-					  	articulos_pedidos.remove(idB);
-					  	request.setAttribute("cliente", cliente);
-		                request.setAttribute("articulo", articulo);
-		                request.setAttribute("lista_articulos", articulos_pedidos);
+					  	articulos_pedidos.remove(idB);				  	
 					  	break;
 					  	
-				  case "Editar":				
-					  idArticulo = Integer.parseInt(request.getParameter("id"));
-					  articulo = articuloDAO.buscarArticuloId(idArticulo);					  						  				  						  
-	                  request.setAttribute("cliente", cliente);
+				  case "Actualizar":
+					  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
+					  ArticuloPedido articulopedidoU = new ArticuloPedido();
+					  int idE = 0;					                    
+	                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+	                  nombre = request.getParameter("txtnombreproducto");
+	                  precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
+	                  cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
+					  articulo = articuloDAO.buscarArticuloId(idArticulo);
+					  if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
+	                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
+	                    	id--;
+	                    	break;
+					  }
+					  for (int i = 0; i < articulos_pedidos.size(); i ++) {
+						  if (articulos_pedidos.get(i).getId() == articulo.getId()) {
+							  idE = i;
+						  }
+					  }
+					  id++;
+	                  subtotal = precio * cantidad;
+	                  articulopedidoU.setId(id);
+	                  articulopedidoU.setNombre(nombre);
+	                  articulopedidoU.setCantidad(cantidad);
+	                  articulopedidoU.setPrecio(precio);
+	                  articulopedidoU.setSubtotal(subtotal);
+	                  articulopedidoU.setId(idArticulo);
+					  articulos_pedidos.set(idE, articulopedidoU);	                  
 	                  break;
-				
+	                  
+				  case "Cargar":				 
+					  idArticulo = Integer.parseInt(request.getParameter("id"));
+					  articulo = articuloDAO.buscarArticuloId(idArticulo);
+					  request.setAttribute("cliente", cliente);
+					  request.setAttribute("articulo", articulo);
+					  request.setAttribute("lista_articulos", articulos_pedidos);
 	                
 				  }
+				
+				
+					
+		  		
 					request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
 				}
 		 

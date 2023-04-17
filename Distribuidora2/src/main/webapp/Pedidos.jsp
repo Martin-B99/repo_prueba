@@ -66,7 +66,8 @@
                                     <input type="number" value="1" name="cantidadproducto" class="form-control" placeholder="Cantidad">
                                 </div>
                             </div>
-                            <input type="submit" name="accion" value="AgregarProducto" class="btn btn-outline-primary col text-center">
+                            <input type="submit" class="btn btn-primary" name="accion" value="AgregarProducto" >
+                            <input type="submit" class="btn btn-success" name="accion" value="Actualizar" >
                             <div class="row"></div>
 
                         </form>
@@ -103,7 +104,7 @@
                             <td>$ ${lista_articulos.getSubtotal()}</td>
                             <td class="columna">
                                 <a class="btn btn-warning" href="Controlador?menu=Pedidos&accion=Eliminar&id=${lista_articulos.getId()}">Eliminar</a>
-                                <a class="btn btn-danger" href="Controlador?menu=Pedidos&accion=Editar&id=${lista_articulos.getId()}">Editar</a>
+                                <a class="btn btn-danger" href="Controlador?menu=Pedidos&accion=Cargar&id=${lista_articulos.getId()}">Editar</a>
                             </td>
                         </tr>
                         </c:forEach> 
