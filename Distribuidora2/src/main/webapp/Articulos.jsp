@@ -73,7 +73,8 @@
                 </div>
             </div>
           
-
+         
+			
             <div class="col-md-8">
                 <table class="table">
                     <thead class="thead-dark">
@@ -85,6 +86,20 @@
                             <th scope="col">Precio</th>
                             <th scope="col">Acciones</th>
                             
+                            <div>
+						
+				<label for="filtro" style="font-weight: bold;">Filtrar por:</label>
+					<select id="filtro" style="padding: 5px; margin-right: 10px;">
+					  <option value="">Seleccionar una opción</option>
+					  <option value="opcion1">Caramelo</option>
+					  <option value="opcion2">Galletita</option>
+					  <option value="opcion3">Chocolate</option>
+					  <option value="opcion4">Tostada</option>
+					  <option value="opcion5">Chupaleta</option>
+					  <option value="opcion6">Gaseosa</option>
+					</select>
+					<button onclick="filtrar()" style="background-color: blue; color: white; padding: 10px; margin: 10px;">Filtrar</button>
+				</div>	
                             
                             
                         </tr>
