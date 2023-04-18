@@ -20,6 +20,7 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import modelo.Articulo;
 import modelo.ArticuloDAO;
 import modelo.ArticuloPedido;
+import modelo.ArticuloPedidoDAO;
 import modelo.Cliente;
 import modelo.ClienteDAO;
 import modelo.Pedido;
@@ -47,6 +48,7 @@ public class Controlador extends HttpServlet {
 	PedidoDAO pedidoDAO = new PedidoDAO();
 	
 	ArticuloPedido articulopedido = new ArticuloPedido();
+	ArticuloPedidoDAO articulopedidoDAO = new ArticuloPedidoDAO();
 	
 	
 	List<ArticuloPedido> articulos_pedidos = new ArrayList<ArticuloPedido>();
@@ -56,7 +58,7 @@ public class Controlador extends HttpServlet {
 	int idTipo;
 	String NombreCliente;
 	int id;
-	int totalpedido;
+	double totalpedido;
 	
 	String nombre;
 	double precio;
@@ -336,7 +338,7 @@ public class Controlador extends HttpServlet {
 						}				  	
 					  	articulos_pedidos.remove(idB);		
 					  	request.setAttribute("cliente", cliente);
-		                request.setAttribute("lista_articulos", articulos_pedidos);
+		                request.setAttribute("lista_articulos", articulos_pedidos);	                
 					  	break;
 					  	
 				  case "Actualizar":
@@ -393,6 +395,14 @@ public class Controlador extends HttpServlet {
 			  switch (accion) {
 			  
 			  case "GenerarVenta":
+				  int idPedido;
+				  pedidoDAO.AgregarPedido(cliente, totalpedido);
+				  idPedido = pedidoDAO.DevolverIdPedido();
+				  for (int i =0; i < articulos_pedidos.size(); i++) {
+					System.out.println(articulos_pedidos.get(i).getId()); 
+					
+				  }
+				  articulopedidoDAO.AgregarArticulos(articulos_pedidos,idPedido);
 				  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
 				  request.setAttribute("cliente", cliente);
                   request.setAttribute("articulo", articulo);	                  
