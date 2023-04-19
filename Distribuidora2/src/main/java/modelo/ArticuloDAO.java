@@ -93,6 +93,31 @@ public class ArticuloDAO {
 			return articulo;
 		}
 	 
+	 public ArrayList<Articulo> ListarPorTipo(int id) {
+			con = cn.Conexion();
+	        String consulta = "SELECT * FROM articulo WHERE id_tipo_articulo=" + id;
+	        ArrayList<Articulo> articulos = new  ArrayList<Articulo>();
+	        try {
+	            ps = con.prepareStatement(consulta);
+	            rs = ps.executeQuery();
+	            while (rs.next()) {
+	    	        Articulo articulo = new Articulo();
+	    			Tipo_Articulo ta = new Tipo_Articulo();
+	    			TipoArticuloDAO tDAO = new TipoArticuloDAO();
+	    			articulo.setId(rs.getInt(id));
+	            	articulo.setNombre(rs.getString("nombre"));
+	            	ta = tDAO.buscarTipoId(rs.getInt("id_tipo_articulo"));
+					articulo.setTa(ta);
+	            	articulo.setStock(rs.getString("stock"));
+	            	articulo.setPrecio(rs.getString("precio"));
+	            	articulos.add(articulo);
+	            }
+	        } catch (SQLException ex) {
+	            Logger.getLogger(ArticuloDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+			return articulos;
+		}
+	 
 	 public void Actualizar(Articulo articulo) {
 	        String sentencia = "UPDATE articulo set nombre=?,id_tipo_articulo=?,stock=?,precio=? WHERE id_articulo=?";
 	        try {
@@ -164,6 +189,6 @@ public class ArticuloDAO {
 			
 		return articulo;
 		}
-	 
+		 
 
 }

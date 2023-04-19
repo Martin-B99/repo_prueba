@@ -52,6 +52,7 @@ public class Controlador extends HttpServlet {
 	
 	
 	List<ArticuloPedido> articulos_pedidos = new ArrayList<ArticuloPedido>();
+	List<Articulo> listaArticulos = new ArrayList<Articulo>();
 
 	int idCliente;
 	int idArticulo;
@@ -64,6 +65,7 @@ public class Controlador extends HttpServlet {
 	double precio;
 	double cantidad;
 	double subtotal;
+	String total;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -144,7 +146,16 @@ public class Controlador extends HttpServlet {
 				request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
 
 				break;
+				
+			case "Filtrar":
+				tipoArt = new Tipo_Articulo();
+				String filtro = request.getParameter("filtro");
+				tipoArt = tipoArtDAO.buscarTipo(filtro);
+				listaArticulos = articuloDAO.ListarPorTipo(tipoArt.getId());
+				System.out.println(listaArticulos);
+				request.setAttribute("articulo", listaArticulos);
 			}
+			
 			
 			request.getRequestDispatcher("Articulos.jsp").forward(request, response);
 		}
@@ -187,7 +198,7 @@ public class Controlador extends HttpServlet {
 				break;
 			case "Cargar":
 
-				idCliente = Integer.parseInt(request.getParameter("id"));
+				idCliente = Integer.parseInt(request.getParameter("id_articulo"));
 				Cliente cliente = clienteDAO.ListarPorId(idCliente);
 				request.setAttribute("clienteSeleccionado", cliente);
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
@@ -276,6 +287,7 @@ public class Controlador extends HttpServlet {
 	                  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
+	                  request.setAttribute("totalapagar", total);
 	                  break;
 	                  
 				  case "AgregarProducto":				  	
@@ -322,7 +334,7 @@ public class Controlador extends HttpServlet {
 	                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
 	                    }
 	                    NumberFormat formatoNumero1 = NumberFormat.getNumberInstance();
-	                    String total = formatoNumero1.format(totalpedido);	                    
+	                    total = formatoNumero1.format(totalpedido);	                    
 	                    request.setAttribute("totalapagar", total);
 	                    	break;
 	              
@@ -338,7 +350,8 @@ public class Controlador extends HttpServlet {
 						}				  	
 					  	articulos_pedidos.remove(idB);		
 					  	request.setAttribute("cliente", cliente);
-		                request.setAttribute("lista_articulos", articulos_pedidos);	                
+		                request.setAttribute("lista_articulos", articulos_pedidos);	       
+		                request.setAttribute("totalapagar", total);
 					  	break;
 					  	
 				  case "Actualizar":
@@ -370,7 +383,8 @@ public class Controlador extends HttpServlet {
 	                  articulopedidoU.setPrecio(precio);
 	                  articulopedidoU.setSubtotal(subtotal);
 	                  articulopedidoU.setId(idArticulo);
-					  articulos_pedidos.set(idE, articulopedidoU);	                  
+					  articulos_pedidos.set(idE, articulopedidoU);	 
+					  request.setAttribute("totalapagar", total);
 	                  break;
 	                  
 				  case "Cargar":				 
@@ -379,6 +393,7 @@ public class Controlador extends HttpServlet {
 					  request.setAttribute("cliente", cliente);
 					  request.setAttribute("articulo", articulo);
 					  request.setAttribute("lista_articulos", articulos_pedidos);
+					  request.setAttribute("totalapagar", total);
 	                
 				  }
 				
