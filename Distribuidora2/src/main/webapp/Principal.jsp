@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="Controlador?menu=TipoArticulo&accion=Listar" target="miContenedor">Tipo Articulo</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Controlador?menu=Ventas&accion=Listar" target="miContenedor">Ventas</a>
+                    </li>
                    
                 </ul>
                 <div class="btn-group">

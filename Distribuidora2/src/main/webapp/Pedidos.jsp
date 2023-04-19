@@ -119,8 +119,8 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="col-md-8 text-center">
-                            <a class="btn btn-success" onclick="print()" href="Controlador?menu=Ventas&accion=GenerarVenta">Generar Venta</a>
-                            <a class="btn btn-danger" href="Controlador?menu=Ventas&accion=NuevaVenta">Nueva Venta</a>
+                            <a class="btn btn-success" onclick="print()" href="Controlador?menu=GenerarVenta&accion=GenerarVenta">Generar Venta</a>
+                            <a class="btn btn-danger" href="Controlador?menu=GenerarVenta&accion=NuevaVenta">Nueva Venta</a>
                           
                         </div>
                         <div class="col-md-4">

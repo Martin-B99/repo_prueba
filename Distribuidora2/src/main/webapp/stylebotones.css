@@ -1,0 +1,21 @@
+.btn-pagado {
+  background-color: green;
+  color: white;
+}
+
+.btn-pagado:active,
+.btn-pagado:focus {
+  background-color: darkgreen;
+  color: white;
+}
+
+.btn-no-pago {
+  background-color: red;
+  color: white;
+}
+
+.btn-no-pago:active,
+.btn-no-pago:focus {
+  background-color: darkred;
+  color: white;
+}

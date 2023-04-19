@@ -405,7 +405,7 @@ public class Controlador extends HttpServlet {
 		 
 		  
 		  
-		  if (menu.equals("Ventas")) {
+		  if (menu.equals("GenerarVenta")) {
 			  
 			  switch (accion) {
 			  
@@ -433,8 +433,88 @@ public class Controlador extends HttpServlet {
 		
 		  }
 		  
-//---------------------------------------------------------------------------------------------------------------
 		  
+		  
+		  
+		  if (menu.equals("Ventas")) {
+				switch (accion) {
+				case "Listar":
+					List lista= articuloDAO.Listar();
+					request.setAttribute("articulo", lista);
+
+					break;
+				
+			
+				case "Agregar":
+					String nombre = request.getParameter("txtnombre"); 
+					String descripcion = request.getParameter("txttipo_articulo");
+					String stock = request.getParameter("txtstock"); 
+					String precio = request.getParameter("txtprecio");
+					tipoArt = tipoArtDAO.buscarTipo(descripcion);
+					articulo.setNombre(nombre);
+					articulo.setStock(stock);
+					articulo.setPrecio(precio);
+					articulo.setTa(tipoArt);
+					articuloDAO.Agregar(articulo);
+					request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
+			  
+			  	break;
+			  	
+				case "Actualizar":
+					Articulo articulo1 = new Articulo();
+					Tipo_Articulo tipoArt1 = new Tipo_Articulo();
+					String nombreUpdate = request.getParameter("txtnombre"); 
+					String descripcionUpdate = request.getParameter("txttipo_articulo");
+					String stockUpdate = request.getParameter("txtstock"); 
+					String precioUpdate = request.getParameter("txtprecio"); 
+					tipoArt1 = tipoArtDAO.buscarTipo(descripcionUpdate);
+					articulo1.setNombre(nombreUpdate);
+					articulo1.setStock(stockUpdate);
+					articulo1.setPrecio(precioUpdate);
+					articulo1.setTa(tipoArt1);
+					articulo1.setId(idArticulo);
+					articuloDAO.Actualizar(articulo1);
+					request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
+
+					break;
+					
+				case "Cargar":
+
+					idArticulo = Integer.parseInt(request.getParameter("id"));
+					Articulo articulo = articuloDAO.ListarPorId(idArticulo);
+					request.setAttribute("articuloSeleccionado", articulo);
+					request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
+
+					break;
+				case "Eliminar":
+
+					idArticulo = Integer.parseInt(request.getParameter("id"));
+					articuloDAO.Eliminar(idArticulo);
+					request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
+
+					break;
+					
+				case "Filtrar":
+					tipoArt = new Tipo_Articulo();
+					String filtro = request.getParameter("filtro");
+					tipoArt = tipoArtDAO.buscarTipo(filtro);
+					listaArticulos = articuloDAO.ListarPorTipo(tipoArt.getId());
+					System.out.println(listaArticulos);
+					request.setAttribute("articulo", listaArticulos);
+				}
+				
+				
+				request.getRequestDispatcher("Ventas.jsp").forward(request, response);
+			}
+		  
+//---------------------------------------------------------------------------------------------------------------
+//################################################################################################################
+//#################################################################################################################
+//#################################################################################################################
+//#################################################################################################################
+//#################################################################################################################
+//#################################################################################################################
+//#################################################################################################################
 		  
 		  else if(menu.equals("PrincipalCliente")) {
 				request.getRequestDispatcher("PrincipalCliente.jsp").forward(request, response);
