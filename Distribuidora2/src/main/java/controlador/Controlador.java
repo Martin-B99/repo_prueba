@@ -154,6 +154,9 @@ public class Controlador extends HttpServlet {
 				listaArticulos = articuloDAO.ListarPorTipo(tipoArt.getId());
 				System.out.println(listaArticulos);
 				request.setAttribute("articulo", listaArticulos);
+				break;
+				  
+				  
 			}
 			
 			
@@ -394,6 +397,7 @@ public class Controlador extends HttpServlet {
 					  request.setAttribute("articulo", articulo);
 					  request.setAttribute("lista_articulos", articulos_pedidos);
 					  request.setAttribute("totalapagar", total);
+					  
 	                
 				  }
 				
