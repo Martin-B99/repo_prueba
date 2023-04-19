@@ -49,21 +49,25 @@ public class Validar extends HttpServlet {
 		  String accion = request.getParameter("accion");
 	        if (accion.equalsIgnoreCase("Ingresar")) {
 	        	try {
+	        	    // código para conectarse a la base de datos
+	        	
+	        	
+	        	try {
 	        		int documento = Integer.parseInt(request.getParameter("txtusuario"));
 		            String pass = request.getParameter("txtpassword");
 		            usuario = usuarioDAO.Validar(documento, pass);
 		            System.out.print("dato"+usuario.getNombre());
-		            if(usuario.getNombre()!= null && usuario.getRol().equals("Empleado")){
+		            if(usuario.getNombre()!= null && usuario.getRol().equals("Admin")){
 		                System.out.print("dato1"+usuario.getNombre());
 		                request.setAttribute("usuario", usuario);
 		                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
 		                
 
 		            }
-		            else if(usuario.getNombre()!= null && usuario.getRol().equals("Cliente")){
+		            else if(usuario.getNombre()!= null && usuario.getRol().equals("Empleado")){
 		                System.out.print("dato1"+usuario.getNombre());
 		                request.setAttribute("usuario", usuario);
-		                request.getRequestDispatcher("Controlador?menu=PrincipalCliente").forward(request, response);}
+		                request.getRequestDispatcher("Controlador?menu=PrincipalVendedor").forward(request, response);}
 		                
 		            
 		            
@@ -73,6 +77,12 @@ public class Validar extends HttpServlet {
 		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
 		                
 		            }
+		            
+		            
+	        	} catch (NullPointerException e) {
+	        		JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos",
+	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+	        	}
 				} catch (NumberFormatException nfe) {
 			
 	                

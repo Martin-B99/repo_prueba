@@ -150,10 +150,16 @@ public class Controlador extends HttpServlet {
 			case "Filtrar":
 				tipoArt = new Tipo_Articulo();
 				String filtro = request.getParameter("filtro");
+				if (filtro.equals("Todos")) {
+					List listaa= articuloDAO.Listar();
+					request.setAttribute("articulo", listaa);
+					
+				}else {
 				tipoArt = tipoArtDAO.buscarTipo(filtro);
 				listaArticulos = articuloDAO.ListarPorTipo(tipoArt.getId());
 				System.out.println(listaArticulos);
 				request.setAttribute("articulo", listaArticulos);
+				}
 			}
 			
 			
@@ -227,9 +233,14 @@ public class Controlador extends HttpServlet {
 				case "Agregar":
 
 					String descripcion = request.getParameter("txtdescripcion");
+					if (descripcion.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Error de Datos",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);					
+					}else {
 					tipoArt.setDescripcion(descripcion);
 
 					tipoArtDAO.Agregar(tipoArt);
+					}
 					request.getRequestDispatcher("Controlador?menu=TipoArticulo&accion=Listar").forward(request, response);
 
 					break;
@@ -282,7 +293,9 @@ public class Controlador extends HttpServlet {
 	                  
 	              
 				  case "BuscarProducto":
-	                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+	                  
+					  try {
+					  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
 	                  articulo = articuloDAO.buscarArticuloId(idArticulo);
 	                  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
@@ -290,8 +303,22 @@ public class Controlador extends HttpServlet {
 	                  request.setAttribute("totalapagar", total);
 	                  break;
 	                  
-				  case "AgregarProducto":				  	
-					  	int existente = 0;
+					  } catch (NumberFormatException ed) {
+					  JOptionPane.showMessageDialog(null, "Error de Datos",
+	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+					  			
+					}
+					  request.setAttribute("cliente", cliente);    	                  
+	                  request.setAttribute("lista_articulos", articulos_pedidos);
+	                  request.setAttribute("totalapagar", total);
+					  request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
+					  break;
+				 
+				  case "AgregarProducto":	
+					  
+					  int existente = 0;
+					  try {
+					  	
 					  	request.setAttribute("cliente", cliente);
 	                    totalpedido = 0;
 	                    articulopedido = new ArticuloPedido(); 
@@ -306,6 +333,8 @@ public class Controlador extends HttpServlet {
 	                    	id--;
 							break;
 						}
+					  
+                    
 	                    id++;
 	                    subtotal = precio * cantidad;
 	                    articulopedido.setId(id);
@@ -315,6 +344,7 @@ public class Controlador extends HttpServlet {
 	                    articulopedido.setSubtotal(subtotal);
 	                    articulopedido.setId(idArticulo);	      
 	                    
+					 
 	                    if (articulos_pedidos.size() == 0) {
 	                    	articulos_pedidos.add(articulopedido);	
 	                    } else {	
@@ -337,6 +367,12 @@ public class Controlador extends HttpServlet {
 	                    total = formatoNumero1.format(totalpedido);	                    
 	                    request.setAttribute("totalapagar", total);
 	                    	break;
+	                    	
+					  } catch (NumberFormatException e2) {
+						  JOptionPane.showMessageDialog(null, "Error de Datos",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  break;
+						}
 	              
 				  case "Eliminar":
 					  	int idB = 0;
@@ -355,6 +391,7 @@ public class Controlador extends HttpServlet {
 					  	break;
 					  	
 				  case "Actualizar":
+					  try {
 					  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
@@ -386,6 +423,11 @@ public class Controlador extends HttpServlet {
 					  articulos_pedidos.set(idE, articulopedidoU);	 
 					  request.setAttribute("totalapagar", total);
 	                  break;
+					  } catch (NumberFormatException e2) {
+						  JOptionPane.showMessageDialog(null, "Error de Datos",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  break;
+						}
 	                  
 				  case "Cargar":				 
 					  idArticulo = Integer.parseInt(request.getParameter("id"));
@@ -516,12 +558,12 @@ public class Controlador extends HttpServlet {
 //#################################################################################################################
 //#################################################################################################################
 		  
-		  else if(menu.equals("PrincipalCliente")) {
-				request.getRequestDispatcher("PrincipalCliente.jsp").forward(request, response);
+		  else if(menu.equals("PrincipalVendedor")) {
+				request.getRequestDispatcher("PrincipalVendedor.jsp").forward(request, response);
 		  }
 			
 		  
-		  if (menu.equals("ArticulosCliente")) {
+		  if (menu.equals("ArticulosVendedor")) {
 				switch (accion) {
 				case "Listar":
 					List lista= articuloDAO.Listar();
@@ -541,7 +583,7 @@ public class Controlador extends HttpServlet {
 					articulo.setPrecio(precio);
 					articulo.setTa(tipoArt);
 					articuloDAO.Agregar(articulo);
-					request.getRequestDispatcher("Controlador?menu=ArticulosCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ArticulosVendedor&accion=Listar").forward(request, response);
 			  
 			  	break;
 			  	
@@ -559,7 +601,7 @@ public class Controlador extends HttpServlet {
 					articulo1.setTa(tipoArt1);
 					articulo1.setId(idArticulo);
 					articuloDAO.Actualizar(articulo1);
-					request.getRequestDispatcher("Controlador?menu=ArticulosCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ArticulosVendedor&accion=Listar").forward(request, response);
 
 					break;
 					
@@ -568,22 +610,22 @@ public class Controlador extends HttpServlet {
 					idArticulo = Integer.parseInt(request.getParameter("id"));
 					Articulo articulo = articuloDAO.ListarPorId(idArticulo);
 					request.setAttribute("articuloSeleccionado", articulo);
-					request.getRequestDispatcher("Controlador?menu=ArticulosCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ArticulosVendedor&accion=Listar").forward(request, response);
 
 					break;
 				case "Eliminar":
 
 					idArticulo = Integer.parseInt(request.getParameter("id"));
 					articuloDAO.Eliminar(idArticulo);
-					request.getRequestDispatcher("Controlador?menu=ArticulosCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ArticulosVendedor&accion=Listar").forward(request, response);
 
 					break;
 				}
 				
-				request.getRequestDispatcher("ArticulosCliente.jsp").forward(request, response);
+				request.getRequestDispatcher("ArticulosVendedor.jsp").forward(request, response);
 			}
 
-			if (menu.equals("ClientesCliente")) {
+			if (menu.equals("ClientesVendedor")) {
 
 				switch (accion) {
 				case "Listar":
@@ -602,7 +644,7 @@ public class Controlador extends HttpServlet {
 					cliente.setDireccion(direccion);
 
 					clienteDAO.Agregar(cliente);
-					request.getRequestDispatcher("Controlador?menu=ClientesCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ClientesVendedor&accion=Listar").forward(request, response);
 
 					break;
 
@@ -616,7 +658,7 @@ public class Controlador extends HttpServlet {
 					cliente1.setDireccion(direccionUpdate);
 					cliente1.setId(idCliente);
 					clienteDAO.Actualizar(cliente1);
-					request.getRequestDispatcher("Controlador?menu=ClientesCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ClientesVendedor&accion=Listar").forward(request, response);
 
 					break;
 				case "Cargar":
@@ -624,22 +666,22 @@ public class Controlador extends HttpServlet {
 					idCliente = Integer.parseInt(request.getParameter("id"));
 					Cliente cliente = clienteDAO.ListarPorId(idCliente);
 					request.setAttribute("clienteSeleccionado", cliente);
-					request.getRequestDispatcher("Controlador?menu=ClientesCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ClientesVendedor&accion=Listar").forward(request, response);
 
 					break;
 				case "Eliminar":
 
 					idCliente = Integer.parseInt(request.getParameter("id"));
 					clienteDAO.Eliminar(idCliente);
-					request.getRequestDispatcher("Controlador?menu=ClientesCliente&accion=Listar").forward(request, response);
+					request.getRequestDispatcher("Controlador?menu=ClientesVendedor&accion=Listar").forward(request, response);
 
 					break;
 				}
 
-				request.getRequestDispatcher("ClientesCliente.jsp").forward(request, response);
+				request.getRequestDispatcher("ClientesVendedor.jsp").forward(request, response);
 			}
 			
-			  if (menu.equals("TipoArticuloCliente")) {
+			  if (menu.equals("TipoArticuloVendedor")) {
 				  switch (accion) {
 					case "Listar":
 						List lista = tipoArtDAO.Listar();
@@ -653,7 +695,7 @@ public class Controlador extends HttpServlet {
 						tipoArt.setDescripcion(descripcion);
 
 						tipoArtDAO.Agregar(tipoArt);
-						request.getRequestDispatcher("Controlador?menu=TipoArticuloCliente&accion=Listar").forward(request, response);
+						request.getRequestDispatcher("Controlador?menu=TipoArticuloVendedor&accion=Listar").forward(request, response);
 
 						break;
 					case "Actualizar":
@@ -662,7 +704,7 @@ public class Controlador extends HttpServlet {
 						tipo_art1.setDescripcion(descripcionUpdate);
 						tipo_art1.setId(idTipo);
 						tipoArtDAO.Actualizar(tipo_art1);
-						request.getRequestDispatcher("Controlador?menu=TipoArticuloCliente&accion=Listar").forward(request, response);
+						request.getRequestDispatcher("Controlador?menu=TipoArticuloVendedor&accion=Listar").forward(request, response);
 
 						break;
 					case "Cargar":
@@ -670,7 +712,7 @@ public class Controlador extends HttpServlet {
 						idTipo = Integer.parseInt(request.getParameter("id"));
 						Tipo_Articulo tipo_articulo = tipoArtDAO.ListarPorId(idTipo);
 						request.setAttribute("tipoArticuloSeleccionado", tipo_articulo);
-						request.getRequestDispatcher("Controlador?menu=TipoArticuloCliente&accion=Listar").forward(request, response);
+						request.getRequestDispatcher("Controlador?menu=TipoArticuloVendedor&accion=Listar").forward(request, response);
 						break;
 						
 					case "Eliminar":
@@ -678,121 +720,14 @@ public class Controlador extends HttpServlet {
 						idTipo = Integer.parseInt(request.getParameter("id"));
 						articuloDAO.EliminarTipo(idTipo); 
 						tipoArtDAO.Eliminar(idTipo);
-						request.getRequestDispatcher("Controlador?menu=TipoArticuloCliente&accion=Listar").forward(request, response);
+						request.getRequestDispatcher("Controlador?menu=TipoArticuloVendedor&accion=Listar").forward(request, response);
 
 						break;
 				  }
-			  request.getRequestDispatcher("TipoArticuloCliente.jsp").forward(request, response); 
+			  request.getRequestDispatcher("TipoArticuloVendedor.jsp").forward(request, response); 
 				  }
 			  
-			  if (menu.equals("PedidosCliente")) {
-				  
-					
-					switch (accion) {
-					  
-					  case "BuscarCliente":
-						  try {
-							  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
-			                  cliente = clienteDAO.buscarClienteId(idCliente);
-			                  
-						} catch (NumberFormatException nfe) {
-						                 
-			                JOptionPane.showMessageDialog(null, "Id Invalido",
-			                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
-						}
-						  request.setAttribute("cliente", cliente);
-		                  break;
-		                  
-		              
-					  case "BuscarProducto":
-		                  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
-		                  articulo = articuloDAO.buscarArticuloId(idArticulo);
-		                  request.setAttribute("cliente", cliente);
-		                  request.setAttribute("articulo", articulo);	                  
-		                  request.setAttribute("lista_articulos", articulos_pedidos);
-		                  break;
-		                  
-					  case "AgregarProducto":
-						  	request.setAttribute("cliente", cliente);
-		                    totalpedido = 0;
-		                    articulopedido = new ArticuloPedido();                    
-		                    idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
-		                    nombre = request.getParameter("txtnombreproducto");
-		                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
-		                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
-		                    if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
-		                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
-		                    	id--;
-								break;
-							}
-		                    id++;
-		                    subtotal = precio * cantidad;
-		                    articulopedido.setId(id);
-		                    articulopedido.setNombre(nombre);
-		                    articulopedido.setCantidad(cantidad);
-		                    articulopedido.setPrecio(precio);
-		                    articulopedido.setSubtotal(subtotal);
-		                    articulopedido.setId(idArticulo);
-		                    articulos_pedidos.add(articulopedido);	                   
-		                    request.setAttribute("lista_articulos", articulos_pedidos);                
-		                    for (int i = 0; i < articulos_pedidos.size(); i++) {
-		                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
-		                    }
-		                    NumberFormat formatoNumero1 = NumberFormat.getNumberInstance();
-		                    String total = formatoNumero1.format(totalpedido);	                    
-		                    request.setAttribute("totalapagar", total);
-		                    	break;
-		              
-					  case "Eliminar":
-						  	int idB = 0;
-						  	idArticulo = Integer.parseInt(request.getParameter("id"));
-						  	articulo = articuloDAO.buscarArticuloId(idArticulo);					  	
-						  	for (int i = 0; i < articulos_pedidos.size(); i ++) {
-						  		if (articulos_pedidos.get(i).getId() == articulo.getId()) {
-						  			idB = i;
-								}
-								
-							}				  	
-						  	articulos_pedidos.remove(idB);
-						  	request.setAttribute("cliente", cliente);
-			                request.setAttribute("articulo", articulo);
-			                request.setAttribute("lista_articulos", articulos_pedidos);
-						  	break;
-						  	
-					  case "Editar":				
-						  idArticulo = Integer.parseInt(request.getParameter("id"));
-						  articulo = articuloDAO.buscarArticuloId(idArticulo);					  						  				  						  
-		                  request.setAttribute("cliente", cliente);
-		                  request.setAttribute("articulo", articulo);	                  
-		                  request.setAttribute("lista_articulos", articulos_pedidos);
-		                  break;
-					
-		                
-					  }
-						request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
-					}
-			 
-			  
-			  
-			  if (menu.equals("VentasClientes")) {
-				  
-				  switch (accion) {
-				  
-				  case "GenerarVenta":
-					  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
-					  request.setAttribute("cliente", cliente);
-	                  request.setAttribute("articulo", articulo);	                  
-	                  request.setAttribute("lista_articulos", articulos_pedidos);
-	                  break;
-	                  
-	              
-				  case "NuevaVenta":
-					  articulos_pedidos.removeAll(articulos_pedidos);
-					  request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
-			  }
-				request.getRequestDispatcher("PedidosCliente.jsp").forward(request, response);
-			
-			  }
+		
 			
 	}
 
