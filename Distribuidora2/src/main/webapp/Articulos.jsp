@@ -98,7 +98,6 @@
 					    <option value="Tostada">Tostada</option>
 					    <option value="Chupaleta">Chupaleta</option>
 					    <option value="Gaseosa">Gaseosa</option>
-					    <option value="Todos">Todos</option>
 					  </select>
 					  <button type="submit" style="background-color: blue; color: white; padding: 10px; margin: 10px;">Filtrar</button> 
 					</form>
