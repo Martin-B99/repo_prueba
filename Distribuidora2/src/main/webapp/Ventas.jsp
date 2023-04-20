@@ -78,13 +78,11 @@
                                
               
                                 <td>
-                               
-                                <button id="btn-pagado" class="btn" >Pagado</button>
-								<button id="btn-no-pago" class="btn">No Pago</button>
+                              
                                 
    
-                          <!--     <a class="btn btn-success" href="Controlador?menu=Articulos&accion=Cargar&id=${articulo.getId()}">Pagado</a>
-                              <a class="btn btn-secondary" href="Controlador?menu=Articulos&accion=Eliminar&id=${articulo.getId()}">No Pagado</a>-->
+                          <a class="btn btn-success" href="Controlador?menu=Articulos&accion=Cargar&id=${articulo.getId()}">Pagado</a>
+                              <a class="btn btn-secondary" href="Controlador?menu=Articulos&accion=Eliminar&id=${articulo.getId()}">No Pagado</a>
                                 </td>
 
                             </tr>

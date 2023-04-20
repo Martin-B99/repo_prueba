@@ -127,8 +127,7 @@ public class ArticuloDAO {
 	            ps.setInt(2, articulo.getTa().getId());
 	            ps.setString(3, articulo.getStock());
 	            ps.setString(4,  articulo.getPrecio());
-	            
-	            
+            
 	            ps.setInt(5, articulo.getId());
 	            ps.executeUpdate();
 
@@ -136,8 +135,7 @@ public class ArticuloDAO {
 	            Logger.getLogger(ArticuloDAO.class.getName()).log(Level.SEVERE, null, ex);
 	        }
 	    }
-
-	
+	 
 	
 	 public void Eliminar(int id) {
 
@@ -189,6 +187,28 @@ public class ArticuloDAO {
 			
 		return articulo;
 		}
+	
+	 public void ActualizarStock(List<ArticuloPedido> articulos_pedidos ) {
+		 String sentencia = "UPDATE articulo set stock=? WHERE id_articulo=?";
+	        try {
+	            con = cn.Conexion();
+	            ps = con.prepareStatement(sentencia);            
+	            for (ArticuloPedido articulo : articulos_pedidos) {
+	                Articulo articulo2 = new Articulo();
+	                int stock = 0;
+	                articulo2 = buscarArticuloId(articulo.getId());
+	                stock = Integer.parseInt(articulo2.getStock()) - (articulo.getCantidad().intValue());
+	                
+	                PreparedStatement ps = con.prepareStatement(sentencia);                
+	                ps.setInt(1,stock);	            
+	                ps.setInt(2, articulo2.getId());
+	                ps.executeUpdate();
+				}	             
+
+	        } catch (SQLException ex) {
+	            Logger.getLogger(ArticuloDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	 }
 		 
 
 }

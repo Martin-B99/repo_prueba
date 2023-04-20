@@ -94,7 +94,6 @@ public class Controlador extends HttpServlet {
 			case "Listar":
 				List lista= articuloDAO.Listar();
 				request.setAttribute("articulo", lista);
-
 				break;
 			
 		
@@ -411,17 +410,13 @@ public class Controlador extends HttpServlet {
 		  
 		  if (menu.equals("GenerarVenta")) {
 			  
-			  switch (accion) {
-			  
+			  switch (accion) {  
 			  case "GenerarVenta":
 				  int idPedido;
 				  pedidoDAO.AgregarPedido(cliente, totalpedido);
 				  idPedido = pedidoDAO.DevolverIdPedido();
-				  for (int i =0; i < articulos_pedidos.size(); i++) {
-					System.out.println(articulos_pedidos.get(i).getId()); 
-					
-				  }
 				  articulopedidoDAO.AgregarArticulos(articulos_pedidos,idPedido);
+				  articuloDAO.ActualizarStock(articulos_pedidos);
 				  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
 				  request.setAttribute("cliente", cliente);
                   request.setAttribute("articulo", articulo);	                  
