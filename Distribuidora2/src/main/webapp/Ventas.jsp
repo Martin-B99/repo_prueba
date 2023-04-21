@@ -24,14 +24,49 @@
             <div class="card col-md-4">
                 <div class="card-body">
                    <h5 class="card-title" align="center">Ventas</h5>
-                    <h6 class="card-subtitle mb-2 text-muted" align="center">En este panel podras Gestionar Las Ventas</h6>
+                    <h6 class="card-subtitle mb-2 text-muted" align="center">En este panel podras Gestionar el pago de las Ventas</h6>
                      <center>
   						<img alt="logo" src="ventas.png"  width="200" height="200" >
    					</center>
-                   
+                  <div>
+                        <form action="Controlador?menu=Ventas" method="POST">
+                        
+                            <div class="form-group">
+                                <label>Id Pedido</label>
+                                <input type="text" class="form-control" name="txtidpedido" value="${pedidoseleccionado.getId_pedido()}" readonly >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" class="form-control" name="txtcliente" value="${pedidoseleccionado.getCliente().getNombre()}" readonly >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Total</label>
+                                <input type="text" class="form-control" name="txttotal" value="${pedidoseleccionado.getTotal()}" readonly>
+                            </div>
+                            <div class="form-group">
+ 							  <label>Condición de Pago</label>
+							  <select class="form-control" name="txtcondicion">
+							    <option value="pagado" ${pedidoseleccionado.isCondicion() ? 'selected' : ''}>Pagado</option>
+							    <option value="no_pagado" ${!pedidoseleccionado.isCondicion() ? 'selected' : ''}>No Pagado</option>
+							  </select>
+							</div>
+
+			
+							<datalist id="pago">
+                            	<option value="Pagado"></option>
+                            	<option value="No Pagado"></option>                           
+                            </datalist>
+                         
+       
+
+                            <input type="submit" class="btn btn-primary" name="accion" value="Actualizar" >
+                            <input type="submit" class="btn btn-success" name="accion" value="Eliminar" >
+                        </form>
+                    </div>
                 </div>
             </div>
-          
          
 			
             <div class="col-md-8">
@@ -39,50 +74,33 @@
                     <thead class="thead-dark">
                         <tr>
                         	<th scope="col">Id</th>
-                           	<th scope="col">Tipo Articulo</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Acciones</th>
+                           	<th scope="col">Cliente</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Condición de Pago</th>
                             
-                            <div>
-					
-					<form action="Controlador?menu=Articulos&accion=Filtrar" method="POST">
-					  <label for="filtro" style="font-weight: bold;">Filtrar por:</label>
-					  <select id="filtro" name="filtro" style="padding: 5px; margin-right: 10px;">
-					    <option value="">Seleccionar una opción</option>
-					    <option value="Caramelo">Caramelo</option>
-					    <option value="Galletita">Galletita</option>
-					    <option value="Chocolate">Chocolate</option>
-					    <option value="Tostada">Tostada</option>
-					    <option value="Chupaleta">Chupaleta</option>
-					    <option value="Gaseosa">Gaseosa</option>
-					  </select>
-					  <button type="submit" style="background-color: blue; color: white; padding: 10px; margin: 10px;">Filtrar</button> 
-					</form>
-				</div>	
+                         
                             
                             
                         </tr>
                     </thead>
+                   
                     <tbody>
                     
-                        <c:forEach var="articulo" items="${articulo}">
+                        <c:forEach var="pedido" items="${pedido}">
 
                             <tr>
-                            	<td>${articulo.getId()}</td>
- 								<td>${articulo.getTa().getDescripcion()}</td>
-                                <td>${articulo.getNombre()}</td>                               
-                                <td>${articulo.getStock()}</td>
-                                <td>${articulo.getPrecio()}</td>
+                            	<td>${pedido.getId_pedido()}</td>
+ 								<td>${pedido.getCliente().getNombre()}</td>
+                                <td>${pedido.getTotal()}</td>                               
+                                <td>${pedido.condicion ? '‎ ‎‎  ‎ ‎‎ ‎ ‎ ‎ ‎ ‎‎ Pagado' : '‎ ‎ ‎ ‎ ‎ ‎ ‎ No Pagado'}</td>
                                
               
                                 <td>
                               
                                 
    
-                          <a class="btn btn-success" href="Controlador?menu=Articulos&accion=Cargar&id=${articulo.getId()}">Pagado</a>
-                              <a class="btn btn-secondary" href="Controlador?menu=Articulos&accion=Eliminar&id=${articulo.getId()}">No Pagado</a>
+                          <a class="btn btn-success" href="Controlador?menu=Ventas&accion=Cargar&id=${pedido.getId_pedido()}">Pago</a>
+                              <a class="btn btn-secondary" href="Controlador?menu=Ventas&accion=Eliminar&id=${pedido.getId_pedido()}">Eliminar</a>
                                 </td>
 
                             </tr>

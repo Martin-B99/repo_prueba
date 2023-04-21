@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class Pedido {
 	
 	private int id_pedido;
-	private Date fecha;
 	private LinkedList<Articulo> articulos = new LinkedList<Articulo>();
 	private Cliente cliente;
 	private double total;
@@ -18,12 +17,7 @@ public class Pedido {
 	public void setId_pedido(int id_pedido) {
 		this.id_pedido = id_pedido;
 	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+
 	public LinkedList<Articulo> getArticulos() {
 		return articulos;
 	}

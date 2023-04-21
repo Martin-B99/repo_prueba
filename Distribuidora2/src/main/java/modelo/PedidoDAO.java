@@ -27,6 +27,32 @@ public class PedidoDAO {
 	int r;
 	int id = 0;
 	
+	public List Listar() {
+		String consulta = "SELECT * FROM pedido";
+		List<Pedido> lista = new ArrayList();
+		try {
+			con = cn.Conexion();
+			ps = con.prepareStatement(consulta);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Pedido pedido = new Pedido();
+				Cliente c = new Cliente();
+				ClienteDAO cDAO = new ClienteDAO();
+				pedido.setId_pedido(rs.getInt("id_pedido"));
+				c = cDAO.buscarClienteId(rs.getInt("cliente"));
+				pedido.setCliente(c);
+				pedido.setTotal(rs.getDouble("total"));
+				pedido.setCondicion(rs.getBoolean("pagado"));	
+				lista.add(pedido);
+
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(ArticuloDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return lista;
+
+	}
+	
 	public int AgregarPedido(Cliente cliente, double totalpedido) {
 		 
 		 String sentencia =
@@ -60,6 +86,57 @@ public class PedidoDAO {
 		 return id;
 		 }
 	
+	public Pedido buscarPedidoId(int id) {
+		con = cn.Conexion();
+		String consulta = "SELECT * FROM pedido WHERE id_pedido=" + id;
+		Pedido pedido = new Pedido();
+        try {
+            ps = con.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            	Cliente cliente = new Cliente();
+            	ClienteDAO clienteDAO = new ClienteDAO();
+            	pedido.setId_pedido(rs.getInt("id_pedido"));
+            	cliente = clienteDAO.buscarClienteId(rs.getInt("cliente"));
+            	pedido.setCliente(cliente);
+            	pedido.setTotal(rs.getDouble("total"));
+            	pedido.setCondicion(rs.getBoolean("pagado"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+		return pedido;
+	}
 	
+	 
+	 public void Actualizar(Pedido pedido) {
+	        String sentencia = "UPDATE pedido set pagado=? WHERE id_pedido=?";
+	        try {
+	            con = cn.Conexion();
+	            ps = con.prepareStatement(sentencia);
+	            ps.setBoolean(1, pedido.isCondicion());
+	            ps.setInt(2, pedido.getId_pedido());
+           
+	            ps.executeUpdate();
+
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	    }
+	 
+	 public void Eliminar(int id) {
+
+	        String sql = "DELETE FROM pedido WHERE id_pedido=" + id;
+	        con = cn.Conexion();
+	        try {
+	            ps = con.prepareStatement(sql);
+	            ps.executeUpdate();
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        
+
+	    }
 
 }
