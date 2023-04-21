@@ -508,7 +508,10 @@ public class Controlador extends HttpServlet {
 					}
 	
 					pedidoDAO.Actualizar(pedido);
+					
 					request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
+					break;
+					 
 					
 				case "Eliminar":
 					try {
@@ -516,11 +519,15 @@ public class Controlador extends HttpServlet {
 						pedidoDAO.Eliminar(idPedido);
 						request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
 						
-					} catch (NumberFormatException e) {
+					} catch (NumberFormatException ea) {
 						JOptionPane.showMessageDialog(null, "No Hay Pedido Seleccionado",
 		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
-						  break;
+						
+					
+						request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
+						
 					}
+					break;
 					
 				}
 							
