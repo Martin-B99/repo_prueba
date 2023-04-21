@@ -511,11 +511,21 @@ public class Controlador extends HttpServlet {
 					request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
 					
 				case "Eliminar":
-					idPedido = Integer.parseInt(request.getParameter("id")); 
-					pedidoDAO.Eliminar(idPedido);
-					request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
+					try {
+						idPedido = Integer.parseInt(request.getParameter("id")); 
+						pedidoDAO.Eliminar(idPedido);
+						request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
+						
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(null, "No Hay Pedido Seleccionado",
+		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  break;
+					}
+					
 				}
 							
+				
+				
 				
 				request.getRequestDispatcher("Ventas.jsp").forward(request, response);
 		  }		
