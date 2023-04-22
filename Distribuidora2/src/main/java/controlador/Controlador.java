@@ -53,6 +53,7 @@ public class Controlador extends HttpServlet {
 	
 	List<ArticuloPedido> articulos_pedidos = new ArrayList<ArticuloPedido>();
 	List<Articulo> listaArticulos = new ArrayList<Articulo>();
+	ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
 	int idCliente;
 	int idArticulo;
@@ -142,6 +143,7 @@ public class Controlador extends HttpServlet {
 			case "Eliminar":
 
 				idArticulo = Integer.parseInt(request.getParameter("id"));
+				articulopedidoDAO.EliminarArticuloPedido2(idArticulo);
 				articuloDAO.Eliminar(idArticulo);
 				request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
 
@@ -214,6 +216,9 @@ public class Controlador extends HttpServlet {
 			case "Eliminar":
 
 				idCliente = Integer.parseInt(request.getParameter("id"));
+				pedidos = pedidoDAO.buscarPedidoCliente(idCliente);
+				articulopedidoDAO.EliminarArticuloPedidoCliente(pedidos);
+				pedidoDAO.EliminarClientePedido(pedidos);
 				clienteDAO.Eliminar(idCliente);
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
 
@@ -488,9 +493,7 @@ public class Controlador extends HttpServlet {
 				case "Cargar":
 
 					idPedido = Integer.parseInt(request.getParameter("id"));
-					System.out.println(idPedido);
 					Pedido pedidoseleccionado = pedidoDAO.buscarPedidoId(idPedido);
-					System.out.println(pedidoseleccionado.getId_pedido());
 					request.setAttribute("pedidoseleccionado", pedidoseleccionado);
 					request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
 					
@@ -516,6 +519,7 @@ public class Controlador extends HttpServlet {
 				case "Eliminar":
 					try {
 						idPedido = Integer.parseInt(request.getParameter("id")); 
+						articulopedidoDAO.EliminarArticuloPedido(idPedido);
 						pedidoDAO.Eliminar(idPedido);
 						request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
 						

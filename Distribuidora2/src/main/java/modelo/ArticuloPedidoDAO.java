@@ -37,5 +37,48 @@ public class ArticuloPedidoDAO {
 	
 		 return r;
 	}
+	
+	 public void EliminarArticuloPedido(int id) {
+
+	        String sql = "DELETE FROM pedido_articulo WHERE id_pedido=" + id;
+	        con = cn.Conexion();
+	        try {
+	            ps = con.prepareStatement(sql);
+	            ps.executeUpdate();
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+
+	    }
+	 
+	 public void EliminarArticuloPedidoCliente(ArrayList<Pedido> pedidos) {
+
+	        String sql = "DELETE FROM pedido_articulo WHERE id_pedido= ?";
+	        con = cn.Conexion();
+	        try {
+	        	for (Pedido pedido : pedidos) {
+		            ps = con.prepareStatement(sql);
+		            ps.setInt(1, pedido.getId_pedido());
+		            ps.executeUpdate();
+				}
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+
+	    }
+	 
+	 public void EliminarArticuloPedido2(int id) {
+
+	        String sql = "DELETE FROM pedido_articulo WHERE id_articulo=" + id;
+	        con = cn.Conexion();
+	        try {
+	            ps = con.prepareStatement(sql);
+	            ps.executeUpdate();
+	        } catch (SQLException ex) {
+	            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+
+	    }
+
 
 }
