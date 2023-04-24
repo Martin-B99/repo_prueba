@@ -62,7 +62,7 @@
        
 
                             <input type="submit" class="btn btn-primary" name="accion" value="Actualizar" >
-                            <input type="submit" class="btn btn-success" name="accion" value="Eliminar" >
+                          
                         </form>
                     </div>
                 </div>

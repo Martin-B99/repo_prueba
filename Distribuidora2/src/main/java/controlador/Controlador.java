@@ -501,6 +501,7 @@ public class Controlador extends HttpServlet {
 					break;
 					
 				case "Actualizar":
+					
 					pedido = new Pedido();				
 					String condicion = request.getParameter("txtcondicion");
 					pedido = pedidoDAO.buscarPedidoId(idPedido);
@@ -511,11 +512,14 @@ public class Controlador extends HttpServlet {
 					}
 	
 					pedidoDAO.Actualizar(pedido);
+				
 					
 					request.getRequestDispatcher("Controlador?menu=Ventas&accion=Listar").forward(request, response);
-					break;
-					 
 					
+					break;
+					
+		 
+				
 				case "Eliminar":
 					try {
 						idPedido = Integer.parseInt(request.getParameter("id")); 
