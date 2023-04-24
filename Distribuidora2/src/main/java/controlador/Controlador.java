@@ -207,7 +207,7 @@ public class Controlador extends HttpServlet {
 				break;
 			case "Cargar":
 
-				idCliente = Integer.parseInt(request.getParameter("id_articulo"));
+				idCliente = Integer.parseInt(request.getParameter("id"));
 				Cliente cliente = clienteDAO.ListarPorId(idCliente);
 				request.setAttribute("clienteSeleccionado", cliente);
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
