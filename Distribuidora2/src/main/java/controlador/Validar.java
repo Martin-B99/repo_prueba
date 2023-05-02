@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
+import modelo.Excepcion;
 import modelo.Usuario;
 import modelo.UsuarioDAO;
 
@@ -49,8 +50,7 @@ public class Validar extends HttpServlet {
 		  String accion = request.getParameter("accion");
 	        if (accion.equalsIgnoreCase("Ingresar")) {
 	        	try {
-	        	    // código para conectarse a la base de datos
-	        	
+	        		
 	        	
 	        	try {
 	        		int documento = Integer.parseInt(request.getParameter("txtusuario"));
@@ -72,23 +72,37 @@ public class Validar extends HttpServlet {
 		            
 		            
 		            else{
-		            	request.getRequestDispatcher("ingreso.jsp").forward(request, response);
-		                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta",
-		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+		            	try {
+                    		
+	                    		throw new Excepcion("Usuario o Contraseña Incorrecta");  
+	                    		
+	                    	
+	                    } catch (Excepcion ee) {
+	                    	
+	                 	   String errorInicio3 = ee.getMessage();
+	                    request.setAttribute("errorInicio3", ee.getMessage()); 
+	                    request.getRequestDispatcher("error.jsp").forward(request, response);
+	                    
+	                    }
+		            	
 		                
 		            }
 		            
 		            
 	        	} catch (NullPointerException e) {
-	        		JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos",
-	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+	        		
+
+					String errorInicio1 = e.getMessage();
+				   request.setAttribute("errorInicio1", e.getMessage()); 
+				   request.getRequestDispatcher("error.jsp").forward(request, response); 
+	        		
 	        	}
 				} catch (NumberFormatException nfe) {
 			
+						String errorInicio2 = nfe.getMessage();
+					   request.setAttribute("errorInicio2", nfe.getMessage()); 
+					   request.getRequestDispatcher("error.jsp").forward(request, response); 
 	                
-	                
-	                JOptionPane.showMessageDialog(null, "Documento Incorrecto",
-	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
 				}
 	        	request.getRequestDispatcher("ingreso.jsp").forward(request, response);
 	            
@@ -101,5 +115,12 @@ public class Validar extends HttpServlet {
 
 	    }
 	}
+
+
+
+
+
+
+
 
 
