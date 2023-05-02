@@ -23,6 +23,7 @@ import modelo.ArticuloPedido;
 import modelo.ArticuloPedidoDAO;
 import modelo.Cliente;
 import modelo.ClienteDAO;
+import modelo.Excepcion;
 import modelo.Pedido;
 import modelo.PedidoDAO;
 import modelo.TipoArticuloDAO;
@@ -289,10 +290,11 @@ public class Controlador extends HttpServlet {
 						  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
 		                  cliente = clienteDAO.buscarClienteId(idCliente);
 		                  
-					} catch (NumberFormatException nfe) {
+					} catch (NumberFormatException e) {
 					                 
-		                JOptionPane.showMessageDialog(null, "Id Invalido",
-		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						String errorMessage = e.getMessage();
+						   request.setAttribute("errorMessage", e.getMessage()); 
+						   request.getRequestDispatcher("error.jsp").forward(request, response); 
 					}
 					  request.setAttribute("cliente", cliente);
 	                  break;
@@ -334,13 +336,18 @@ public class Controlador extends HttpServlet {
 	                    nombre = request.getParameter("txtnombreproducto");
 	                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
 	                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
-	                    if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
-	                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
-	                    	id--;
-							break;
-						}
-					  
-                    
+	                    try {
+	                        if (cantidad > Double.parseDouble(articulo.getStock())) {
+	                            throw new Excepcion("Stock Insuficiente");
+	                        }
+	                    } catch (Excepcion e) {
+	                    	
+	                       	   String error = e.getMessage();
+							   request.setAttribute("error", e.getMessage()); 
+							   request.getRequestDispatcher("error.jsp").forward(request, response); 
+	                           id--;
+	                           break;
+	                    }
 	                    id++;
 	                    subtotal = precio * cantidad;
 	                    articulopedido.setId(id);
@@ -359,11 +366,19 @@ public class Controlador extends HttpServlet {
 	                    			existente = 1;	                   
 	                    		}
 	                    	}
-	                    	if (existente == 1) {
-	                    		JOptionPane.showMessageDialog(null, "Articulo Existente");             
-	                    	} else {
-	                    		articulos_pedidos.add(articulopedido);	
-	                    	}
+	                    	try {
+	                    		if (existente == 1) {
+		                    		throw new Excepcion("Stock Insuficiente");          
+		                    	} else {
+		                    		articulos_pedidos.add(articulopedido);	
+		                    	}
+		                    } catch (Excepcion e) {
+		                    	
+		                       	   String error1 = e.getMessage();
+								   request.setAttribute("error1", e.getMessage()); 
+								   request.getRequestDispatcher("error.jsp").forward(request, response); 
+		                    }
+	                    	
 	                    }	
 	                    request.setAttribute("lista_articulos", articulos_pedidos);                
 	                    for (int i = 0; i < articulos_pedidos.size(); i++) {

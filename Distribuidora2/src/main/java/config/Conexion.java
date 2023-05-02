@@ -10,9 +10,10 @@ import java.util.logging.Logger;
 public class Conexion {
 	   
     Connection con;
-    String url="jdbc:mysql://localhost:3306/distribuidora";
+    
+    String url="jdbc:mysql://node135889-env-5485043.jelastic.saveincloud.net:3306/distribuidora";
     String usuario = "root";
-    String clave = "1234";
+    String clave = "XAXams25167";
    
    public Connection Conexion(){
        
@@ -27,7 +28,6 @@ public class Conexion {
         return con;
     }
    }
-
 
 
 
