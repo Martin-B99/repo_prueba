@@ -296,18 +296,7 @@ public class Controlador extends HttpServlet {
 						   request.setAttribute("errorMessage", e.getMessage()); 
 						   request.getRequestDispatcher("error.jsp").forward(request, response); 
 					}
-					  
-					try {
-						if (idCliente == 0) {
-							throw new Excepcion("Datos incorrectos");
-						}
-					} catch ( Excepcion e) {
-						String error = e.getMessage();
-						request.setAttribute("errorIngreso", e.getMessage()); 
-						break;
-					}
-					  request.setAttribute("cliente", cliente);
-	                  break;
+					  		
 	                  
 	              
 				  case "BuscarProducto":
@@ -322,8 +311,10 @@ public class Controlador extends HttpServlet {
 	                  break;
 	                  
 					  } catch (NumberFormatException ed) {
-					  JOptionPane.showMessageDialog(null, "Error de Datos",
-	                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  String errorIngreso = ed.getMessage();
+						  request.setAttribute("errorIngreso", ed.getMessage()); 
+						  request.getRequestDispatcher("error.jsp").forward(request, response);
+	                		  
 					  			
 					}
 					  request.setAttribute("cliente", cliente);    	                  
