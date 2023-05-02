@@ -296,6 +296,16 @@ public class Controlador extends HttpServlet {
 						   request.setAttribute("errorMessage", e.getMessage()); 
 						   request.getRequestDispatcher("error.jsp").forward(request, response); 
 					}
+					  
+					try {
+						if (idCliente == 0) {
+							throw new Excepcion("Datos incorrectos");
+						}
+					} catch ( Excepcion e) {
+						String error = e.getMessage();
+						request.setAttribute("errorIngreso", e.getMessage()); 
+						break;
+					}
 					  request.setAttribute("cliente", cliente);
 	                  break;
 	                  

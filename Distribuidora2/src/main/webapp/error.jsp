@@ -18,6 +18,14 @@
       window.history.back();
     </script>	
   <% } %>
+  
+    <% String errorIngreso = (String) request.getAttribute("errorIngreso"); %>
+  <% if (errorIngreso != null && !errorIngreso.isEmpty()) { %>
+    <script>
+      alert("Datos incorrectos");
+      window.history.back();
+    </script>	
+  <% } %>
    
    
   <% String errorInicio1 = (String) request.getAttribute("errorInicio1"); %>
