@@ -181,14 +181,24 @@ public class Controlador extends HttpServlet {
 
 			case "Agregar":
 
-				String nombre = request.getParameter("txtnombre");
-				String telefono = request.getParameter("txttelefono");
-				String direccion = request.getParameter("txtdireccion");
-				cliente.setNombre(nombre);
-				cliente.setTelefono(telefono);
-				cliente.setDireccion(direccion);
-
-				clienteDAO.Agregar(cliente);
+				try {
+					String nombre = request.getParameter("txtnombre");
+					String telefono = request.getParameter("txttelefono");
+					String direccion = request.getParameter("txtdireccion");
+					cliente.setNombre(nombre);
+					cliente.setTelefono(telefono);
+					cliente.setDireccion(direccion);
+					if (nombre.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
+						throw new Excepcion("Datos Incorrectos");	
+					} else {
+						clienteDAO.Agregar(cliente);
+					}
+				} catch (Exception e) {
+					String errorIngreso = e.getMessage();
+					request.setAttribute("errorIngreso", e.getMessage()); 					
+					request.getRequestDispatcher("error.jsp").forward(request, response);					
+					break;
+				}
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
 
 				break;
@@ -250,8 +260,8 @@ public class Controlador extends HttpServlet {
 						}
 					} catch (Exception e) {
 						String errorIngreso = e.getMessage();
-						request.setAttribute("errorIngreso", e.getMessage()); 
-						request.getRequestDispatcher("error.jsp").forward(request, response);
+						request.setAttribute("errorIngreso", e.getMessage()); 					
+						request.getRequestDispatcher("error.jsp").forward(request, response);					
 						break;
 					}
 					request.getRequestDispatcher("Controlador?menu=TipoArticulo&accion=Listar").forward(request, response);
