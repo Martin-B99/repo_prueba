@@ -35,7 +35,17 @@
     <script>
      
       alert("Documento Incorrecto");
-      window.history.back();
+      window.location.href = "ingreso.jsp";
+    </script>
+  <% } %>
+  
+  
+   <% String errorInicio3 = (String) request.getAttribute("errorInicio3"); %>
+  <% if (errorInicio3 != null && !errorInicio3.isEmpty()) { %>
+    <script>
+     
+      alert("Usuario o Contraseña Incorrecta");
+      window.location.href = "ingreso.jsp";
     </script>
   <% } %>
  
@@ -95,6 +105,8 @@
       window.history.back(); 
     </script>
   <% } %>
+  
+  
  
 </body>
 </html>
