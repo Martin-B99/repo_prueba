@@ -240,13 +240,19 @@ public class Controlador extends HttpServlet {
 				case "Agregar":
 
 					String descripcion = request.getParameter("txtdescripcion");
-					if (descripcion.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Error de Datos",
-		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);					
-					}else {
-					tipoArt.setDescripcion(descripcion);
+					try {
+						if (descripcion.isEmpty()) {
+							throw new Excepcion("Datos Incorrectos");				
+						} else {
+							tipoArt.setDescripcion(descripcion);
 
-					tipoArtDAO.Agregar(tipoArt);
+							tipoArtDAO.Agregar(tipoArt);
+						}
+					} catch (Exception e) {
+						String errorIngreso = e.getMessage();
+						request.setAttribute("errorIngreso", e.getMessage()); 
+						request.getRequestDispatcher("error.jsp").forward(request, response);
+						break;
 					}
 					request.getRequestDispatcher("Controlador?menu=TipoArticulo&accion=Listar").forward(request, response);
 
@@ -292,7 +298,7 @@ public class Controlador extends HttpServlet {
 		                  
 					} catch (NumberFormatException e) {
 					                 
-						String errorMessage = e.getMessage();
+						   String errorMessage = e.getMessage();
 						   request.setAttribute("errorMessage", e.getMessage()); 
 						   request.getRequestDispatcher("error.jsp").forward(request, response); 
 					}

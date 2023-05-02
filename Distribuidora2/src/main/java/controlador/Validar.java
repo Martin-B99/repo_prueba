@@ -79,7 +79,7 @@ public class Validar extends HttpServlet {
 	                    	
 	                    } catch (Excepcion ee) {
 	                    	
-	                 	   String errorInicio3 = ee.getMessage();
+	                 	String errorInicio3 = ee.getMessage();
 	                    request.setAttribute("errorInicio3", ee.getMessage()); 
 	                    request.getRequestDispatcher("error.jsp").forward(request, response);
 	                    
