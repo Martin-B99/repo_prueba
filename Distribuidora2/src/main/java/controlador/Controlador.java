@@ -359,8 +359,8 @@ public class Controlador extends HttpServlet {
 	                        }
 	                    } catch (Excepcion e) {
 	                    	
-	                       	   String error = e.getMessage();
-							   request.setAttribute("error", e.getMessage()); 
+	                       	   String error1 = e.getMessage();
+							   request.setAttribute("error1", e.getMessage()); 
 							   request.getRequestDispatcher("error.jsp").forward(request, response); 
 	                           id--;
 	                           break;
@@ -407,8 +407,9 @@ public class Controlador extends HttpServlet {
 	                    	break;
 	                    	
 					  } catch (NumberFormatException e2) {
-						  JOptionPane.showMessageDialog(null, "Error de Datos",
-		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  String errorMessage2 = e2.getMessage();
+						   request.setAttribute("errorMessage2", e2.getMessage()); 
+						   request.getRequestDispatcher("error.jsp").forward(request, response);
 						  break;
 						}
 	              
@@ -440,11 +441,25 @@ public class Controlador extends HttpServlet {
 	                  precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
 	                  cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
 					  articulo = articuloDAO.buscarArticuloId(idArticulo);
-					  if (cantidad > Double.parseDouble(articulo.getStock())) {                    	
-	                    	JOptionPane.showMessageDialog(null, "Stock Insuficiente");
-	                    	id--;
-	                    	break;
+					  
+					  
+					  try {
+						  if (cantidad > Double.parseDouble(articulo.getStock())) {
+							   
+	                    		throw new Excepcion("Stock Insuficiente");  
+	                    		
+	                    	} 
+	                    } catch (Excepcion e) {
+	                    	
+	                       	   String error = e.getMessage();
+							   request.setAttribute("error", e.getMessage()); 
+							   request.getRequestDispatcher("error.jsp").forward(request, response);
+							   id--;
+			   	
 					  }
+					  
+					  
+					  
 					  for (int i = 0; i < articulos_pedidos.size(); i ++) {
 						  if (articulos_pedidos.get(i).getId() == articulo.getId()) {
 							  idE = i;
@@ -462,8 +477,9 @@ public class Controlador extends HttpServlet {
 					  request.setAttribute("totalapagar", total);
 	                  break;
 					  } catch (NumberFormatException e2) {
-						  JOptionPane.showMessageDialog(null, "Error de Datos",
-		                		  "Algo Anda Mal", JOptionPane.WARNING_MESSAGE);
+						  String errorMessage2 = e2.getMessage();
+						   request.setAttribute("errorMessage2", e2.getMessage()); 
+						   request.getRequestDispatcher("error.jsp").forward(request, response);
 						  break;
 						}
 	                  
@@ -495,7 +511,26 @@ public class Controlador extends HttpServlet {
 				  idPedido = pedidoDAO.DevolverIdPedido();
 				  articulopedidoDAO.AgregarArticulos(articulos_pedidos,idPedido);
 				  articuloDAO.ActualizarStock(articulos_pedidos);
-				  JOptionPane.showMessageDialog(null, "Venta Generada Correctamente");
+				  
+				  
+				  try {
+					  
+						   
+                    		throw new Excepcion("Venta Generada Correctamente");  
+                    		
+                     
+                    } catch (Excepcion e) {
+                    	
+                       	   String Venta = e.getMessage();
+						   request.setAttribute("Venta", e.getMessage()); 
+						   request.getRequestDispatcher("error.jsp").forward(request, response);
+						   id--;
+		   	
+				  }
+				  
+				  
+				  
+			
 				  request.setAttribute("cliente", cliente);
                   request.setAttribute("articulo", articulo);	                  
                   request.setAttribute("lista_articulos", articulos_pedidos);

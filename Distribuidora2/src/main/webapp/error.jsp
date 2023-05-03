@@ -5,6 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+   <link rel="stylesheet" href="style.css">
   <title>Página de error</title>
   
 </head>
@@ -14,8 +15,16 @@
   <% String errorIngreso = (String) request.getAttribute("errorIngreso"); %>
   <% if (errorIngreso != null && !errorIngreso.isEmpty()) { %>
     <script>
-      alert("Datos incorrectos");
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Datos incorrectos.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
       window.history.back();
+    });
+     
     </script>	
   <% } %>
   
@@ -23,8 +32,15 @@
   <% if (errorMessage != null && !errorMessage.isEmpty()) { %>
     <script>
       	
-      alert("No Existe Cliente");
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>No Existe Cliente.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
       window.history.back();
+    });
     </script>	
   <% } %>
 
@@ -33,9 +49,18 @@
   <% String errorInicio1 = (String) request.getAttribute("errorInicio1"); %>
   <% if (errorInicio1 != null && !errorInicio1.isEmpty()) { %>
     <script>
+    
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Error de conexión a la base de datos.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
+    	window.location.href = "ingreso.jsp";
+    });
       
-      alert("Error de conexión a la base de datos");
-      window.history.back();
+     
     </script>
   <% } %>
  
@@ -43,9 +68,18 @@
   <% String errorInicio2 = (String) request.getAttribute("errorInicio2"); %>
   <% if (errorInicio2 != null && !errorInicio2.isEmpty()) { %>
     <script>
+    
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Documento Incorrecto.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
+    	window.location.href = "ingreso.jsp";
+    });
      
-      alert("Documento Incorrecto");
-      window.location.href = "ingreso.jsp";
+    
     </script>
   <% } %>
   
@@ -54,8 +88,17 @@
   <% if (errorInicio3 != null && !errorInicio3.isEmpty()) { %>
     <script>
      
-      alert("Usuario o Contraseña Incorrecta");
-      window.location.href = "ingreso.jsp";
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Usuario o Contraseña Incorrecta.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
+    	window.location.href = "ingreso.jsp";
+    });
+     
+    
     </script>
   <% } %>
  
@@ -64,45 +107,54 @@
   <% if (errorMessage2 != null && !errorMessage2.isEmpty()) { %>
     <script>
       
-      alert("Error de Datos");
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Error de Datos.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
       window.history.back();
+    });
+    
+     
     </script>
   <% } %>
  
- 
-  <% String errorMessage3 = (String) request.getAttribute("errorMessage3"); %>
-  <% if (errorMessage3 != null && !errorMessage3.isEmpty()) { %>
+
+  <% String Venta = (String) request.getAttribute("Venta"); %>
+  <% if (Venta != null && !Venta.isEmpty()) { %>
     <script>
       
-      alert("Error de Datos");
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Bien!</h1><p>Venta Generada Correctamente.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
       window.history.back();
+    });
+    
+     
     </script>
   <% } %>
  
-  <% String errorMessage4 = (String) request.getAttribute("errorMessage4"); %>
-  <% if (errorMessage4 != null && !errorMessage4.isEmpty()) { %>
-    <script>
-      
-      alert("Error de Datos");
-      window.history.back();
-    </script>
-  <% } %>
- 
-  <% String errorMessage5 = (String) request.getAttribute("errorMessage5"); %>
-  <% if (errorMessage5 != null && !errorMessage5.isEmpty()) { %>
-    <script>
-      
-      alert("No Hay Pedido Seleccionado");
-      window.history.back();
-    </script>
-  <% } %>
+
   
    <% String error = (String) request.getAttribute("error"); %>
   <% if (error != null && !error.isEmpty()) { %>
     <script>
-      
-      alert("Stock Insuficiente");
-      window.history.back(); 
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>Stock Insuficiente.</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
+      window.history.back();
+    });
+   
     </script>
   <% } %>
   
@@ -110,9 +162,18 @@
    <% String error1 = (String) request.getAttribute("error1"); %>
   <% if (error1 != null && !error1.isEmpty()) { %>
     <script>
+    
+    var alerta = document.createElement('div');
+    alerta.classList.add('alert');
+    alerta.innerHTML = '<h1>¡Error!</h1><p>El Articulo Ya Existe</p><button>Volver</button>';
+    document.body.appendChild(alerta);
+
+    var boton = alerta.querySelector('button');
+    boton.addEventListener('click', function() {
+      window.history.back();
+    });
       
-      alert("Articulo Existente");
-      window.history.back(); 
+     
     </script>
   <% } %>
   
