@@ -101,6 +101,7 @@ public class Controlador extends HttpServlet {
 			
 		
 			case "Agregar":
+				try {
 				String nombre = request.getParameter("txtnombre"); 
 				String descripcion = request.getParameter("txttipo_articulo");
 				String stock = request.getParameter("txtstock"); 
@@ -109,26 +110,48 @@ public class Controlador extends HttpServlet {
 				articulo.setNombre(nombre);
 				articulo.setStock(stock);
 				articulo.setPrecio(precio);
-				articulo.setTa(tipoArt);
-				articuloDAO.Agregar(articulo);
+				articulo.setTa(tipoArt);			
+				if (nombre.isEmpty() || descripcion.isEmpty() || stock.isEmpty() || precio.isEmpty()) {
+					throw new Excepcion("Datos Incorrectos");	
+				} else {
+					articuloDAO.Agregar(articulo);
+				}
+				} catch (Exception e) {
+				String errorIngreso = e.getMessage();
+				request.setAttribute("errorIngreso", e.getMessage()); 		
+				request.getRequestDispatcher("error.jsp").forward(request, response);	
+				break;
+			}
 				request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
 		  
 		  	break;
 		  	
 			case "Actualizar":
-				Articulo articulo1 = new Articulo();
-				Tipo_Articulo tipoArt1 = new Tipo_Articulo();
-				String nombreUpdate = request.getParameter("txtnombre"); 
-				String descripcionUpdate = request.getParameter("txttipo_articulo");
-				String stockUpdate = request.getParameter("txtstock"); 
-				String precioUpdate = request.getParameter("txtprecio"); 
-				tipoArt1 = tipoArtDAO.buscarTipo(descripcionUpdate);
-				articulo1.setNombre(nombreUpdate);
-				articulo1.setStock(stockUpdate);
-				articulo1.setPrecio(precioUpdate);
-				articulo1.setTa(tipoArt1);
-				articulo1.setId(idArticulo);
-				articuloDAO.Actualizar(articulo1);
+				try {
+					Articulo articulo1 = new Articulo();
+					Tipo_Articulo tipoArt1 = new Tipo_Articulo();
+					String nombreUpdate = request.getParameter("txtnombre"); 
+					String descripcionUpdate = request.getParameter("txttipo_articulo");
+					String stockUpdate = request.getParameter("txtstock"); 
+					String precioUpdate = request.getParameter("txtprecio"); 
+					tipoArt1 = tipoArtDAO.buscarTipo(descripcionUpdate);
+					articulo1.setNombre(nombreUpdate);
+					articulo1.setStock(stockUpdate);
+					articulo1.setPrecio(precioUpdate);
+					articulo1.setTa(tipoArt1);
+					articulo1.setId(idArticulo);	
+					if (nombreUpdate.isEmpty() || descripcionUpdate.isEmpty() || stockUpdate.isEmpty() || precioUpdate.isEmpty()) {
+						throw new Excepcion("Datos Incorrectos");	
+					} else {
+						articuloDAO.Actualizar(articulo1);
+					}
+				} catch (Exception e) {
+					String errorIngreso = e.getMessage();
+					request.setAttribute("errorIngreso", e.getMessage()); 		
+					request.getRequestDispatcher("error.jsp").forward(request, response);	
+					break;
+				}
+				
 				request.getRequestDispatcher("Controlador?menu=Articulos&accion=Listar").forward(request, response);
 
 				break;
@@ -195,8 +218,8 @@ public class Controlador extends HttpServlet {
 					}
 				} catch (Exception e) {
 					String errorIngreso = e.getMessage();
-					request.setAttribute("errorIngreso", e.getMessage()); 					
-					request.getRequestDispatcher("error.jsp").forward(request, response);					
+					request.setAttribute("errorIngreso", e.getMessage()); 		
+					request.getRequestDispatcher("error.jsp").forward(request, response);	
 					break;
 				}
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
@@ -204,15 +227,27 @@ public class Controlador extends HttpServlet {
 				break;
 
 			case "Actualizar":
-				Cliente cliente1 = new Cliente();
-				String nombreUpdate = request.getParameter("txtnombre");
-				String telefonoUpdate = request.getParameter("txttelefono");
-				String direccionUpdate = request.getParameter("txtdireccion");
-				cliente1.setNombre(nombreUpdate);
-				cliente1.setTelefono(telefonoUpdate);
-				cliente1.setDireccion(direccionUpdate);
-				cliente1.setId(idCliente);
-				clienteDAO.Actualizar(cliente1);
+				try {
+					Cliente cliente1 = new Cliente();
+					String nombreUpdate = request.getParameter("txtnombre");
+					String telefonoUpdate = request.getParameter("txttelefono");
+					String direccionUpdate = request.getParameter("txtdireccion");
+					cliente1.setNombre(nombreUpdate);
+					cliente1.setTelefono(telefonoUpdate);
+					cliente1.setDireccion(direccionUpdate);
+					cliente1.setId(idCliente);
+					if (nombreUpdate.isEmpty() || telefonoUpdate.isEmpty() || direccionUpdate.isEmpty()) {
+						throw new Excepcion("Datos Incorrectos");	
+					} else {
+						clienteDAO.Actualizar(cliente1);
+					}
+				} catch (Exception e) {
+					String errorIngreso = e.getMessage();
+					request.setAttribute("errorIngreso", e.getMessage()); 		
+					request.getRequestDispatcher("error.jsp").forward(request, response);	
+					break;
+				}
+
 				request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
 
 				break;
@@ -268,11 +303,22 @@ public class Controlador extends HttpServlet {
 
 					break;
 				case "Actualizar":
-					Tipo_Articulo tipo_art1 = new Tipo_Articulo();
-					String descripcionUpdate = request.getParameter("txtdescripcion");
-					tipo_art1.setDescripcion(descripcionUpdate);
-					tipo_art1.setId(idTipo);
-					tipoArtDAO.Actualizar(tipo_art1);
+					try {
+						Tipo_Articulo tipo_art1 = new Tipo_Articulo();
+						String descripcionUpdate = request.getParameter("txtdescripcion");
+						tipo_art1.setDescripcion(descripcionUpdate);
+						tipo_art1.setId(idTipo);				
+						if (descripcionUpdate.isEmpty()) {
+							throw new Excepcion("Datos Incorrectos");	
+						} else {
+							tipoArtDAO.Actualizar(tipo_art1);
+						}
+					} catch (Exception e) {
+						String errorIngreso = e.getMessage();
+						request.setAttribute("errorIngreso", e.getMessage()); 		
+						request.getRequestDispatcher("error.jsp").forward(request, response);	
+						break;
+					}
 					request.getRequestDispatcher("Controlador?menu=TipoArticulo&accion=Listar").forward(request, response);
 
 					break;
