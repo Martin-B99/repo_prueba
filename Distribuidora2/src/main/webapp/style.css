@@ -11,6 +11,9 @@
 width: 70%;
 
 }
+a {
+  text-decoration: none;
+}
 body{
   margin: 0;
   padding: 0;
@@ -122,10 +125,10 @@ input[type="submit"]:hover{
   background-color: #00ffff;
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 4px 2px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   font-size: 16px;
   margin: 10px;
   border-radius: 5px;
@@ -135,6 +138,8 @@ input[type="submit"]:hover{
   background-color: #c0c0c0;
   cursor: pointer;
 }
+
+
 .overlay {
   position: fixed;
   top: 0;

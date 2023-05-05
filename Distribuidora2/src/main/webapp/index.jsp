@@ -20,12 +20,13 @@
    </center>
       <h1>¡Tu Distribuidora!</h1>
       <center>
-      <button class="btn-contacto"><a href="ingreso.jsp">Ingresar</a></button>
+      <button class="btn-contacto"><a href="ingreso.jsp" >Ingresar</a></button>
         </center>
       
        <center>
-      <button class="btn-contacto"><a href="fin.jsp">Sobre Nosotros</a></button>
+      <button class="btn-contacto"><a href="fin.jsp" ">Sobre Nosotros</a></button>
         </center>
+		
 		
       
     
