@@ -349,15 +349,20 @@ public class Controlador extends HttpServlet {
 				  
 				  case "BuscarCliente":
 					  try {
+						  
 						  idCliente = Integer.parseInt(request.getParameter("txtidcliente"));
 		                  cliente = clienteDAO.buscarClienteId(idCliente);
 		                  
-					} catch (NumberFormatException e) {
-					                 
-						   String errorMessage = e.getMessage();
-						   request.setAttribute("errorMessage", e.getMessage()); 
-						   request.getRequestDispatcher("error.jsp").forward(request, response); 
+						if(cliente.getNombre().isEmpty()) {
+							throw new Excepcion("Datos Incorrectos");  
+						}
+					} catch (Exception e) {
+						 String errorIngreso = e.getMessage();
+						 request.setAttribute("errorIngreso", e.getMessage()); 
+						 request.getRequestDispatcher("error.jsp").forward(request, response);
 					}
+		            request.setAttribute("cliente", cliente);
+					break;
 					  		
 	                  
 	              
@@ -369,9 +374,7 @@ public class Controlador extends HttpServlet {
 	                  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
-	                  request.setAttribute("totalapagar", total);
-	                  break;
-	                  
+	                  request.setAttribute("totalapagar", total);                                    
 					  } catch (NumberFormatException ed) {
 						  String errorIngreso = ed.getMessage();
 						  request.setAttribute("errorIngreso", ed.getMessage()); 
@@ -379,9 +382,6 @@ public class Controlador extends HttpServlet {
 	                		  
 					  			
 					}
-					  request.setAttribute("cliente", cliente);    	                  
-	                  request.setAttribute("lista_articulos", articulos_pedidos);
-	                  request.setAttribute("totalapagar", total);
 					  request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
 					  break;
 				 
