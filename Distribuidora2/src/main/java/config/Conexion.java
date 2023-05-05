@@ -11,9 +11,9 @@ public class Conexion {
 	   
     Connection con;
     
-    String url= "jdbc:mysql://localhost:3306/distribuidora";
+    String url="jdbc:mysql://node136958-distribuidorafinal.jelastic.saveincloud.net:3306/Distribuidora";
     String usuario = "root";
-    String clave = "1942";
+    String clave ="CHMtef74188";
    
    public Connection Conexion(){
        

@@ -33,13 +33,13 @@
                                     <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-dark"> 
                                 </div>
                                 <div class="col-md-4 d-flex form-group">
-                                 	<input type="text" name="txtnombrecliente" class="form-control" placeholder="Nombre"  value="${cliente.getNombre()}">
+                                 	<input type="text" name="txtnombrecliente" class="form-control" placeholder="Nombre"  value="${cliente.getNombre()}" readonly>
                                  </div>
                                  <div class="col-md-4 d-flex form-group">
-                                 	<input type="text" name="txttelefono" class="form-control" placeholder="Telefono"  value="${cliente.getTelefono()}">
+                                 	<input type="text" name="txttelefono" class="form-control" placeholder="Telefono"  value="${cliente.getTelefono()}" readonly>
                                  </div>
                                  <div class="col-md-4 d-flex form-group">
-                                 	<input type="text" name="txtdireccion" class="form-control" placeholder="Direccion"  value="${cliente.getDireccion()}">
+                                 	<input type="text" name="txtdireccion" class="form-control" placeholder="Direccion"  value="${cliente.getDireccion()}" readonly>
                                  </div>
                             </div>
                             <div class="row"></div>
@@ -57,10 +57,10 @@
                                     <input type="submit" name="accion" value="BuscarProducto" class="btn btn-outline-dark">
                                 </div>
                                 <div class="col-md-6 d-flex form-group">
-                                    <input type="text" name="txtnombreproducto" class="form-control" placeholder="Nombre Articulo" value="${articulo.getNombre()}">
+                                    <input type="text" name="txtnombreproducto" class="form-control" placeholder="Nombre Articulo" value="${articulo.getNombre()}" readonly>
                                 </div>
                                 <div class="col-md-4 d-flex form-group">
-                                    <input type="text" name="txtprecioproducto" class="form-control" placeholder="$ 0000.00" value="${articulo.getPrecio()}">
+                                    <input type="text" name="txtprecioproducto" class="form-control" placeholder="$ 0000.00" value="${articulo.getPrecio()}" readonly>
                                 </div>
                                 <div class="col-md-8 d-flex form-group">
                                     <input type="number" value="1" name="cantidadproducto" class="form-control" placeholder="Cantidad">
