@@ -361,28 +361,33 @@ public class Controlador extends HttpServlet {
 						 request.setAttribute("errorIngreso", e.getMessage()); 
 						 request.getRequestDispatcher("error.jsp").forward(request, response);
 					}
+					request.setAttribute("lista_articulos", articulos_pedidos);
+	                request.setAttribute("totalapagar", total); 
 		            request.setAttribute("cliente", cliente);
 					break;
 					  		
 	                  
 	              
 				  case "BuscarProducto":
-	                  
-					  try {
-					  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
-	                  articulo = articuloDAO.buscarArticuloId(idArticulo);
-	                  request.setAttribute("cliente", cliente);
+             
+					  try {  
+		                
+						  idArticulo = Integer.parseInt(request.getParameter("txtidproducto"));
+						  articulo = articuloDAO.buscarArticuloId(idArticulo);         
+						  
+	                  	if(articulo.getNombre().isEmpty()) {
+	                  		throw new Excepcion("Datos Incorrectos"); 
+	                  	}
+	                  	
+					  } catch (Exception e) {
+						  String errorIngreso = e.getMessage();
+						  request.setAttribute("errorIngreso", e.getMessage()); 
+						  request.getRequestDispatcher("error.jsp").forward(request, response);			
+					  }
+					  request.setAttribute("cliente", cliente);
 	                  request.setAttribute("articulo", articulo);	                  
 	                  request.setAttribute("lista_articulos", articulos_pedidos);
-	                  request.setAttribute("totalapagar", total);                                    
-					  } catch (NumberFormatException ed) {
-						  String errorIngreso = ed.getMessage();
-						  request.setAttribute("errorIngreso", ed.getMessage()); 
-						  request.getRequestDispatcher("error.jsp").forward(request, response);
-	                		  
-					  			
-					}
-					  request.getRequestDispatcher("Pedidos.jsp").forward(request, response);
+	                  request.setAttribute("totalapagar", total);  
 					  break;
 				 
 				  case "AgregarProducto":	
@@ -400,17 +405,18 @@ public class Controlador extends HttpServlet {
 	                    precio =   Double.parseDouble(request.getParameter("txtprecioproducto"));
 	                    cantidad = Double.parseDouble(request.getParameter("cantidadproducto"));
 	                    try {
-	                        if (cantidad > Double.parseDouble(articulo.getStock())) {
+	                        if (cantidad > Double.parseDouble(articulo.getStock()) ) {
 	                            throw new Excepcion("Stock Insuficiente");
 	                        }
 	                    } catch (Excepcion e) {
 	                    	
-	                       	   String error1 = e.getMessage();
-							   request.setAttribute("error1", e.getMessage()); 
+	                       	   String error = e.getMessage();
+							   request.setAttribute("error", e.getMessage()); 
 							   request.getRequestDispatcher("error.jsp").forward(request, response); 
 	                           id--;
 	                           break;
 	                    }
+	                    
 	                    id++;
 	                    subtotal = precio * cantidad;
 	                    articulopedido.setId(id);
@@ -418,9 +424,9 @@ public class Controlador extends HttpServlet {
 	                    articulopedido.setCantidad(cantidad);
 	                    articulopedido.setPrecio(precio);
 	                    articulopedido.setSubtotal(subtotal);
-	                    articulopedido.setId(idArticulo);	      
+	                    articulopedido.setId(idArticulo);	
+      					                   
 	                    
-					 
 	                    if (articulos_pedidos.size() == 0) {
 	                    	articulos_pedidos.add(articulopedido);	
 	                    } else {	
@@ -431,7 +437,7 @@ public class Controlador extends HttpServlet {
 	                    	}
 	                    	try {
 	                    		if (existente == 1) {
-		                    		throw new Excepcion("Stock Insuficiente");          
+		                    		throw new Excepcion("El Articulo Ya Existe");          
 		                    	} else {
 		                    		articulos_pedidos.add(articulopedido);	
 		                    	}
@@ -442,7 +448,8 @@ public class Controlador extends HttpServlet {
 								   request.getRequestDispatcher("error.jsp").forward(request, response); 
 		                    }
 	                    	
-	                    }	
+	                    }
+	                    
 	                    request.setAttribute("lista_articulos", articulos_pedidos);                
 	                    for (int i = 0; i < articulos_pedidos.size(); i++) {
 	                    	totalpedido += articulos_pedidos.get(i).getSubtotal();
