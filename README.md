@@ -60,7 +60,7 @@ Los siguientes casos de usos refieren a la entidad Artículo la cual depende de 
 
 Caso de uso Complejo:
 
--	CUU13 – Realizar Venta.
+-	CUR15 – Realizar Venta.
 
 Camino Básico: 
 El vendedor realiza la busqueda del cliente mediante su id, el sistema muestra los datos por pantalla. El vendedor ingresa en el sistema los artículos solicitados por el cliente con sus respectivas cantidades y genera el pedido, el sistema lo registra e informa el registro de mismo.
