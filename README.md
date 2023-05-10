@@ -54,12 +54,16 @@ Los siguientes casos de usos refieren a la entidad Artículo la cual depende de 
 
 -	CUU12 – Buscar Artículo.
 
+-	CUU13 - Registrar Pedido.
+
+- CUU14 - Registrar pago.
+
 Caso de uso Complejo:
 
--	CUU13 – Registrar pedido y pago.
+-	CUU13 – Realizar Venta.
 
 Camino Básico: 
-El vendedor ingresa en el sistema los artículos solicitados por el usuario con sus respectivas cantidades y genera el pedido, el sistema lo registra e informa el registro de mismo.
-Una vez recibido el pedido, el cliente paga el mismo y el usuario registra el pago del mimos en el sistema cambiando la condición de No pagado a Pagado, el sistema lo registra.
+El vendedor realiza la busqueda del cliente mediante su id, el sistema muestra los datos por pantalla. El vendedor ingresa en el sistema los artículos solicitados por el cliente con sus respectivas cantidades y genera el pedido, el sistema lo registra e informa el registro de mismo.
+Cuando el cliente realiza el pago del pedido, el vendedor registra el pago del mismo en el sistema cambiando la condición de No pagado a Pagado, el sistema lo registra.
 
 Restricciones del caso de uso: Las cantidades ingresadas por el vendedor no pueden ser mayor al stock existente de cada producto.
